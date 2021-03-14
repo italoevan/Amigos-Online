@@ -1,5 +1,6 @@
 import 'package:amigos_online/routes/app_pages.dart';
 import 'package:amigos_online/routes/app_routes.dart';
+import 'package:amigos_online/ui/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,5 +13,6 @@ void main() async {
     initialRoute: Routes.INITIAL,
     getPages: AppPages.pages,
     defaultTransition: Transition.cupertino,
+    theme: AppTheme.whiteTheme,
   ));
 }

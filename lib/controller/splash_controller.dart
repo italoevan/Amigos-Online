@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amigos_online/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,9 +17,9 @@ class SplashController extends GetxController {
     verifyUserConnection().then((value) => {
           Timer(Duration(seconds: 2), () {
             if (value) {
-              Get.offAll(HomeView());
+              Get.offAllNamed(Routes.HOME);
             } else {
-              Get.offAll(LoginView());
+              Get.offAllNamed(Routes.LOGIN);
             }
           })
         });
