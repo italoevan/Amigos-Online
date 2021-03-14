@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "610062036289",
+    "project_id": "brawlers-75454",
+    "storage_bucket": "brawlers-75454.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610062036289:android:b44c2c2bb61ce7829ac5c0",
+        "android_client_info": {
+          "package_name": "com.evinc.amigos_online"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610062036289-4di9es9e2cde83baq4i0ok39if8g28dd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.evinc.amigos_online",
+            "certificate_hash": "243c9e3211fa65c4aee367340cedefdc6457c90d"
+          }
+        },
+        {
+          "client_id": "610062036289-ggpjjve6ip8upr6vquier7a8vk24hu2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQeli63_UkpIScqZhUtnto8j-OR2FhsqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610062036289-ggpjjve6ip8upr6vquier7a8vk24hu2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
