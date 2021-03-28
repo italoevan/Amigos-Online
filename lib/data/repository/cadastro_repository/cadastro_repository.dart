@@ -9,6 +9,7 @@ class CadastroRepository {
   Future cadastrar(String email, String senha) async {
     try {
       var response = await provider.cadastrar(email, senha);
+      return response;
     } catch (e) {
       return throw e;
     }
