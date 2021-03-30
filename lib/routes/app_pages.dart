@@ -11,6 +11,9 @@ class AppPages {
     GetPage(name: Routes.INITIAL, page: () => SplashScreen()),
     GetPage(name: Routes.HOME, page: () => HomeView()),
     GetPage(name: Routes.LOGIN, page: () => LoginView()),
-    GetPage(name: Routes.CADASTRO, page: () => CadastroView(), binding: CadastroBinding())
+    GetPage(
+        name: Routes.CADASTRO,
+        page: () => CadastroView(),
+        bindings: [CadastroBinding()])
   ];
 }

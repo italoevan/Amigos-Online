@@ -62,10 +62,10 @@ class CadastroView extends StatelessWidget {
                         RaisedButton(
                             onPressed: () {
                               controller.validate()
-                                  ? print('ok')
+                                  ? controller.cadastrar()
                                   : print('nao ok');
                             },
-                            child: Text("Validate")),
+                            child: Text("Cadastrar")),
                         RaisedButton(
                           onPressed: () => controller.chooseImage(),
                           child: Text("Escolher imagem"),

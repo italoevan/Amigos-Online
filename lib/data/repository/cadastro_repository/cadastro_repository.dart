@@ -1,4 +1,4 @@
-import 'package:amigos_online/data/provider/cadastro_provider/cadastro_provider.dart';
+import 'package:amigos_online/data/provider/cadastro_providers/cadastro_provider.dart';
 import 'package:meta/meta.dart';
 
 class CadastroRepository {
@@ -11,7 +11,7 @@ class CadastroRepository {
       var response = await provider.cadastrar(email, senha);
       return response;
     } catch (e) {
-      return throw e;
+      return throw Exception(e);
     }
   }
 }

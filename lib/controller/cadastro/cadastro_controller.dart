@@ -1,15 +1,22 @@
 import 'dart:io';
 
 import 'package:amigos_online/data/repository/cadastro_repository/cadastro_repository.dart';
+import 'package:amigos_online/data/repository/cadastro_repository/nick_name_firebase_repository.dart';
+import 'package:amigos_online/routes/app_routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CadastroController extends GetxController {
-  CadastroController({@required this.repository});
-  CadastroRepository repository;
+  CadastroController(
+      {@required this.cadastroRepository,
+      @required this.nickNameFirebaseRepository});
+  CadastroRepository cadastroRepository;
+  final NickNameFirebaseRepository nickNameFirebaseRepository;
   List<String> errorsList = ["", "", "", "", ""].obs;
   Rx<File> image = Rx<File>();
   var verificationImage;
@@ -18,12 +25,25 @@ class CadastroController extends GetxController {
   Rx<TextEditingController> senhaController = TextEditingController().obs;
   Rx<TextEditingController> apelidoController = TextEditingController().obs;
 
+  var loading = false.obs;
+
   Future cadastrar() async {
-    var response = await repository.cadastrar(
-        emailController.value.text, senhaController.value.text);
+    print("${emailController.value.text} e ${senhaController.value.text}");
+    try {
+      var response = await cadastroRepository.cadastrar(
+          emailController.value.text, senhaController.value.text);
+      print("$response Value aq");
+      createNick(apelido: apelidoController.value.text, id: response.user.uid);
+      Get.offAllNamed(Routes.HOME);
+    } catch (e) {
+      SnackBar(content: Text("Ops, algo deu errado"));
+    }
   }
 
-  userFirestoreRegister() {}
+  Future createNick({@required String apelido, @required String id}) async {
+    var response =
+        await nickNameFirebaseRepository.createNick(apelido: apelido, id: id);
+  }
 
   bool validate() {
     if (verificationImage != null) {
