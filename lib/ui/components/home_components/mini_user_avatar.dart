@@ -13,15 +13,16 @@ class MiniUserAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => controller.modelHasLoaded.value
         ? InkWell(
-          onTap: onTap,
-                  child: Container(
-              height: 45,
-              width: 45,
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(controller.userModel.user_image),
-                backgroundColor: Colors.grey,
-              )),
-        )
+            onTap: onTap,
+            child: Container(
+                height: 45,
+                width: 45,
+                child: CircleAvatar(
+                  backgroundImage:
+                      NetworkImage(controller.userModel.user_image),
+                  backgroundColor: Colors.grey,
+                )),
+          )
         : Container());
   }
 }

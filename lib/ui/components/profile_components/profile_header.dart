@@ -1,20 +1,21 @@
 import 'dart:io';
 
+import 'package:amigos_online/controller/user_profile_controllers/user_profile_controller.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/ui/components/signup_components/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileHeader extends StatelessWidget {
-  ProfileHeader({@required this.model});
-
+  ProfileHeader({@required this.model, @required this.controller, @required this.isOwnProfile});
+  final UserProfileController controller;
   final UserModel model;
+  final bool isOwnProfile;
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height,
-      width: Get.width,
       child: Column(
         children: [
           Container(
@@ -33,8 +34,20 @@ class ProfileHeader extends StatelessWidget {
                   isNetworkImage: true,
                   networkImage: model.user_image,
                 ),
-                Text(model.name,
-                    style: TextStyle(color: Colors.black, fontSize: 25)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Obx(() => controller.hasNameLoaded.value
+                        ? Text(controller.userName.value,
+                            style: TextStyle(color: Colors.black, fontSize: 25))
+                        : Text("Usuario")),
+                   isOwnProfile ? IconButton(
+                      icon: Icon(Icons.settings),
+                      onPressed: controller.openDialogToChangeName,
+                      color: Colors.red,
+                    ) : SizedBox(height: 0,)
+                  ],
+                ),
                 Container(
                   margin: EdgeInsets.only(top: 5),
                   padding: EdgeInsets.all(3),
@@ -52,8 +65,10 @@ class ProfileHeader extends StatelessWidget {
                             "Posts:",
                             style: TextStyle(color: Colors.black),
                           ),
-                          Text(model.n_posts.toString(),
-                              style: TextStyle(color: Colors.black))
+                          Obx(() => controller.hasPostCountLoaded.value
+                              ? Text(controller.userPostsCount.value.toString(),
+                                  style: TextStyle(color: Colors.black))
+                              : Text(""))
                         ],
                       )
                     ],

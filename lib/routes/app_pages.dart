@@ -1,6 +1,7 @@
 import 'package:amigos_online/binding/cadastro_binding/cadastro_binding.dart';
 import 'package:amigos_online/binding/home_binding/home_binding.dart';
 import 'package:amigos_online/binding/home_binding/user_provider_binding.dart';
+import 'package:amigos_online/binding/user_profile_binding/user_profile_binding.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/pages/home/home_view.dart';
 import 'package:amigos_online/ui/pages/login_cadastro/cadastro_view.dart';
@@ -18,6 +19,6 @@ class AppPages {
         name: Routes.CADASTRO,
         page: () => CadastroView(),
         bindings: [CadastroBinding()]),
-        GetPage(name: Routes.USERPROFILE, page: ()=> UserProfileView())
+        GetPage(name: Routes.USERPROFILE, page: ()=> UserProfileView(), binding: UserProfileBinding())
   ];
 }

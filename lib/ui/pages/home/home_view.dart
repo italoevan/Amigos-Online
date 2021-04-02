@@ -15,30 +15,29 @@ class HomeView extends StatelessWidget {
       Get.find<UserProviderController>();
   @override
   Widget build(BuildContext context) {
-    return Provider<UserProviderController>(
-      create: (_) => userController,
-      child: Scaffold(
-        drawer: HomeDrawer(
-          controller: userController,
-        ),
-        appBar: AppBar(
-          title: Text("Amigos Online"),
-          actions: [
-            MiniUserAvatar(
-              controller: userController,
-              onTap: () async {
-                controller.isLoading.value = true;
-                await userController.getUserInformations();
-                controller.isLoading.value = false;
-                Get.toNamed(Routes.USERPROFILE,
-                    arguments: {"userModel": userController.userModel});
-              },
-            )
-          ],
-        ),
-        body: Obx(() => LoadingUtil(
-            widget: Container(), loading: controller.isLoading.value)),
+    return Scaffold(
+      drawer: HomeDrawer(
+        controller: userController,
       ),
+      appBar: AppBar(
+        title: Text("Amigos Online"),
+        actions: [
+          MiniUserAvatar(
+            controller: userController,
+            onTap: () async {
+              controller.isLoading.value = true;
+              await userController.getUserInformations();
+              controller.isLoading.value = false;
+              Get.toNamed(Routes.USERPROFILE, arguments: {
+                "userModel": userController.userModel,
+                "isOwnProfile": true
+              });
+            },
+          )
+        ],
+      ),
+      body: Obx(() => LoadingUtil(
+          widget: Container(), loading: controller.isLoading.value)),
     );
   }
 }
