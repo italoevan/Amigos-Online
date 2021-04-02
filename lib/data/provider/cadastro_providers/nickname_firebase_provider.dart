@@ -1,6 +1,5 @@
 import 'package:amigos_online/utils/firebase_utils/endpoints/nick_name_endpoints.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NickNameProvider {
@@ -9,14 +8,17 @@ class NickNameProvider {
   NickNameProvider({@required this.firestore});
 
   Future createNick({@required apelido, @required id}) async {
-    print('CREATENICK');
-    Map<String, dynamic> map = {"apelido": "$apelido"};
+    print('$apelido $id');
+    Map<String, dynamic> map = {"name": "$apelido"};
 
-    await NickNameEndpoints()
-        .post(firebaseFirestore: apelido, id: id, map: map)
-        .then((value) => value)
-        .catchError((e) {
-      return throw Exception(e);
-    });
+    await firestore
+        .collection('users')
+        .doc(id)
+        .set({"user_id": id, "n_posts": 0});
+
+    var response = await NickNameEndpoints()
+        .post(firebaseFirestore: firestore, id: id, map: map);
+
+    return response;
   }
 }

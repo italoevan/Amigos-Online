@@ -1,8 +1,9 @@
 class UserModel {
+  UserModel();
   String name;
   int n_posts;
   String user_image;
-  int user_id;
+  String user_id;
 
   UserModel.fromJson(Map<String, dynamic> map) {
     name = map['name'];

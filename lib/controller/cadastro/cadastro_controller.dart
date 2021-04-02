@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:amigos_online/data/repository/cadastro_repository/cadastro_repository.dart';
 import 'package:amigos_online/data/repository/cadastro_repository/nick_name_firebase_repository.dart';
+import 'package:amigos_online/data/repository/cadastro_repository/user_avatar_repository.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,8 +15,10 @@ import 'package:image_picker/image_picker.dart';
 class CadastroController extends GetxController {
   CadastroController(
       {@required this.cadastroRepository,
-      @required this.nickNameFirebaseRepository});
+      @required this.nickNameFirebaseRepository,
+      @required this.userAvatarRepository});
   CadastroRepository cadastroRepository;
+  final UserAvatarRepository userAvatarRepository;
   final NickNameFirebaseRepository nickNameFirebaseRepository;
   List<String> errorsList = ["", "", "", "", ""].obs;
   Rx<File> image = Rx<File>();
@@ -28,14 +31,23 @@ class CadastroController extends GetxController {
   var loading = false.obs;
 
   Future cadastrar() async {
+    loading.value = true;
     print("${emailController.value.text} e ${senhaController.value.text}");
+
     try {
       var response = await cadastroRepository.cadastrar(
           emailController.value.text, senhaController.value.text);
       print("$response Value aq");
-      createNick(apelido: apelidoController.value.text, id: response.user.uid);
+
+      await createNick(
+          apelido: apelidoController.value.text, id: response.user.uid);
+
+      await userAvatarRepository.setUserImage(
+          file: image.value, id: response.user.uid);
+      loading.value = false;
       Get.offAllNamed(Routes.HOME);
     } catch (e) {
+      loading.value = false;
       SnackBar(content: Text("Ops, algo deu errado"));
     }
   }
