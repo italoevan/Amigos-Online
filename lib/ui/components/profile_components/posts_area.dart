@@ -1,5 +1,5 @@
 import 'package:amigos_online/controller/user_profile_controllers/user_profile_controller.dart';
-import 'package:amigos_online/ui/components/profile_components/posts_item.dart';
+import 'package:amigos_online/ui/components/generic_components/posts_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';

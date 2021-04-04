@@ -1,10 +1,10 @@
 import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/routes/app_routes.dart';
-import 'package:amigos_online/ui/components/home_components/drawer_home.dart';
-import 'package:amigos_online/ui/components/home_components/home_posts_area.dart';
-import 'package:amigos_online/ui/components/home_components/mini_user_avatar.dart';
-import 'package:amigos_online/ui/components/home_components/new_post_area.dart';
+import 'package:amigos_online/ui/components/home_components/drawer/drawer_home.dart';
+import 'package:amigos_online/ui/components/home_components/body/home_posts_area.dart';
+import 'package:amigos_online/ui/components/home_components/body/mini_user_avatar.dart';
+import 'package:amigos_online/ui/components/home_components/body/new_post_area.dart';
 import 'package:amigos_online/utils/generic_utils/loading_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

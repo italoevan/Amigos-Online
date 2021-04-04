@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:amigos_online/controller/cadastro/cadastro_controller.dart';
 import 'package:amigos_online/ui/components/signup_components/signup_divider.dart';
-import 'package:amigos_online/ui/components/signup_components/user_avatar.dart';
+import 'package:amigos_online/ui/components/generic_components/user_avatar.dart';
 import 'package:amigos_online/utils/generic_utils/loading_util.dart';
 import 'package:amigos_online/utils/generic_utils/text_field_generic.dart';
 import 'package:flutter/material.dart';

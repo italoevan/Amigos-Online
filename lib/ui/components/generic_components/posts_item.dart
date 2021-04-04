@@ -1,6 +1,7 @@
 import 'package:amigos_online/controller/posts_item_controller/posts_item_controller.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
-import 'package:amigos_online/ui/components/signup_components/user_avatar.dart';
+import 'package:amigos_online/routes/app_routes.dart';
+import 'package:amigos_online/ui/components/generic_components/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -64,7 +65,9 @@ class PostsItem extends StatelessWidget {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               return FlatButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Get.toNamed(Routes.COMENTS, arguments: {"posts_model" : model});
+                                  },
                                   child: Text("Comentar (${snapshot.data})"));
                             } else {
                               return FlatButton(

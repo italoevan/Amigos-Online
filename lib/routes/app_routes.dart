@@ -4,4 +4,5 @@ abstract class Routes {
   static const CADASTRO = '/cadastro';
   static const HOME = '/home';
   static const USERPROFILE = "/user_profile";
+  static const COMENTS = "/coments";
 }
