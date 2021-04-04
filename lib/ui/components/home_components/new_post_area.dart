@@ -44,8 +44,11 @@ class NewPostArea extends StatelessWidget {
             ),
             Row(
               children: [
-                MiniUserAvatar(
-                  controller: userController,
+                Padding(
+                  padding: EdgeInsets.only(bottom: 18),
+                                  child: MiniUserAvatar(
+                    controller: userController,
+                  ),
                 ),
                 Expanded(
                     child: Padding(

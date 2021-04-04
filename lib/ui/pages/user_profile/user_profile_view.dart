@@ -56,48 +56,46 @@ class UserProfileView extends StatelessWidget {
                   ],
                 ),
               )
-            : SingleChildScrollView(
-                child: Container(
-                  height: Get.height,
-                  width: Get.width,
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: Get.height,
-                        width: Get.width,
-                        child: Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.lightGreen,
-                                  borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(32),
-                                      bottomLeft: Radius.circular(32))),
-                              height: Get.height * 0.25,
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                          height: Get.height,
-                          width: Get.width,
-                          child: Column(
-                            children: [
-                              ProfileHeader(
-                                isOwnProfile: isOwnProfile,
-                                controller: userController,
-                                model: userController.model,
-                              ),
-                              Expanded(
-                                child: PostsArea(
-                                  controller: userController,
-                                ),
-                              )
-                            ],
-                          ))
-                    ],
+            : Container(
+              height: Get.height,
+              width: Get.width,
+              child: Stack(
+                children: [
+                  Container(
+                    height: Get.height,
+                    width: Get.width,
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.lightGreen,
+                              borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(32),
+                                  bottomLeft: Radius.circular(32))),
+                          height: Get.height * 0.25,
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ));
+                  Container(
+                      height: Get.height,
+                      width: Get.width,
+                      child: Column(
+                        children: [
+                          ProfileHeader(
+                            isOwnProfile: isOwnProfile,
+                            controller: userController,
+                            model: userController.model,
+                          ),
+                          Expanded(
+                            child: PostsArea(
+                              controller: userController,
+                            ),
+                          )
+                        ],
+                      ))
+                ],
+              ),
+            ));
   }
 }

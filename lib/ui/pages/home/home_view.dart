@@ -39,25 +39,24 @@ class HomeView extends StatelessWidget {
         ],
       ),
       body: Obx(() => LoadingUtil(
-          widget: SingleChildScrollView(
-            child: Container(
-              height: Get.height,
-              width: Get.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(24),
-                    child: NewPostArea(
-                      userController: userController,
-                      controller: controller,
-                    ),
-                  ),
-                  HomePostsArea(
+          widget: Container(
+            height: Get.height,
+            width: Get.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(24),
+                  child: NewPostArea(
+                    userController: userController,
                     controller: controller,
-                  )
-                ],
-              ),
+                  ),
+                ),
+                Divider(),
+                HomePostsArea(
+                  controller: controller,
+                )
+              ],
             ),
           ),
           loading: controller.isLoading.value)),

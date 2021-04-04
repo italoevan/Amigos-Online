@@ -1,10 +1,14 @@
+import 'package:amigos_online/controller/posts_item_controller/posts_item_controller.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/ui/components/signup_components/user_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PostsItem extends StatelessWidget {
-  PostsItem({@required this.model});
+  PostsItem({@required this.model, this.onNameTap});
   final PostsModel model;
+  final Function onNameTap;
+  final PostsItemController controller = Get.put(PostsItemController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,12 +22,19 @@ class PostsItem extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        UserAvatar(
-                          isNetworkImage: true,
-                          isMiniAvatar: true,
-                          networkImage: model.user_image,
+                        GestureDetector(
+                          onTap: onNameTap,
+                          child: Row(
+                            children: [
+                              UserAvatar(
+                                isNetworkImage: true,
+                                isMiniAvatar: true,
+                                networkImage: model.user_image,
+                              ),
+                              Text(model.user_name),
+                            ],
+                          ),
                         ),
-                        Text(model.user_name),
                         Expanded(
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -48,8 +59,20 @@ class PostsItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                            child: FlatButton(
-                                onPressed: () {}, child: Text("Comentar"))),
+                            child: FutureBuilder(
+                          future: controller.getNumberOfComents(model),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return FlatButton(
+                                  onPressed: () {},
+                                  child: Text("Comentar (${snapshot.data})"));
+                            } else {
+                              return FlatButton(
+                                  onPressed: () {},
+                                  child: Text("Comentar (0)"));
+                            }
+                          },
+                        )),
                         Expanded(
                             child: FlatButton(
                                 onPressed: () {}, child: Text("Denunciar"))),

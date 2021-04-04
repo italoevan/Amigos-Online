@@ -4,7 +4,8 @@ import 'package:amigos_online/utils/consts/consts_url.dart';
 import 'package:flutter/material.dart';
 
 class UserAvatar extends StatelessWidget {
-  UserAvatar({this.image, this.networkImage, this.isNetworkImage, this.isMiniAvatar});
+  UserAvatar(
+      {this.image, this.networkImage, this.isNetworkImage, this.isMiniAvatar});
   final File image;
   final String networkImage;
   bool isMiniAvatar = false;
@@ -15,19 +16,22 @@ class UserAvatar extends StatelessWidget {
         ? Padding(
             padding: EdgeInsets.all(5),
             child: Container(
-                height: isMiniAvatar == true ? 50: 125,
-                width:  isMiniAvatar == true ? 50: 125,
+                height: isMiniAvatar == true ? 50 : 125,
+                width: isMiniAvatar == true ? 50 : 125,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
-                  child: Image.network(networkImage, fit: BoxFit.cover,),
+                  child: Image.network(
+                    networkImage,
+                    fit: BoxFit.cover,
+                  ),
                 )),
           )
         : image == null
             ? Padding(
                 padding: EdgeInsets.all(12),
                 child: Container(
-                    height: isMiniAvatar == true ? 50: 140,
-                    width:isMiniAvatar == true ? 50: 140,
+                    height: isMiniAvatar == true ? 50 : 140,
+                    width: isMiniAvatar == true ? 50 : 140,
                     child: Image.network(
                       ConstsUrl.avatarImage,
                       fit: BoxFit.cover,

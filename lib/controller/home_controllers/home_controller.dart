@@ -42,8 +42,8 @@ class HomeController extends GetxController {
     await getUserInformation();
     if (verification()) {
       isLoading.value = true;
-      var atualDate = Timestamp.now();
-      var date = atualDate.toDate();
+      var date = Timestamp.now();
+
       print(date);
 
       PostsModel postsModel = PostsModel();
@@ -87,19 +87,38 @@ class HomeController extends GetxController {
   }
 
   Future<bool> getHomePosts() async {
-    List<PostsModel> modelPostList = [];
     try {
-      
-      var response = await firebaseFirestore.collection("all_posts").orderBy('date', descending: true).get();
+      var response = await firebaseFirestore
+          .collection("all_posts")
+          .orderBy("date", descending: true)
+          .get();
+      List<PostsModel> modelPostList = [];
 
       response.docs.forEach((element) {
-        print(element.data());
         modelPostList.add(PostsModel.fromJson(element.data()));
       });
+
       listPosts = modelPostList;
+
       return true;
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<UserModel> getOtherUserInformation(PostsModel model) async {
+    isLoading.value = true;
+    try{
+    var response =
+        await firebaseFirestore.collection('users').doc(model.user_id).get();
+
+    UserModel otherUserModel = UserModel.fromJson(response.data());
+    isLoading.value = false;
+    return otherUserModel;
+    }
+    catch(e){
+      isLoading.value = false;
+      return null;
     }
   }
 
