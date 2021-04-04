@@ -6,11 +6,14 @@ class GenericTextField extends StatefulWidget {
       this.error,
       this.hasHint,
       this.textHint,
-      this.isPassword});
+      this.isPassword,
+      this.maxLength
+      });
   final bool hasHint;
   final String error;
   final String textHint;
   final bool isPassword;
+  final int maxLength;
   bool passwordIsVisible = false;
   final TextEditingController controller;
 
@@ -22,12 +25,14 @@ class _GenericTextFieldState extends State<GenericTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLength:widget.maxLength ,
       obscureText: widget.isPassword != null
           ? !widget.passwordIsVisible
               ? true
               : false
           : false,
       controller: widget.controller,
+      
       decoration: InputDecoration(
           suffix: widget.isPassword == true ? InkWell(
             child: Icon(Icons.remove_red_eye_sharp),

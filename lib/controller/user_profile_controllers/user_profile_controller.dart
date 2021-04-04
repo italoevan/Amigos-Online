@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class UserProfileController extends GetxController {
-  final UserModel model = Get.arguments["userModel"]; //Use-se aso seja o proprio perfil
+  final UserModel model =
+      Get.arguments["userModel"]; //Use-se aso seja o proprio perfil
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   TextEditingController changeNameController = TextEditingController();
@@ -122,8 +123,9 @@ class UserProfileController extends GetxController {
     try {
       var response = await firestore
           .collection('users')
-          .doc(model.user_id)
-          .collection('posts')
+          .doc(model.user_id).
+          collection('posts')
+          .orderBy('date', descending: true)
           .get();
 
       List<PostsModel> postList = [];

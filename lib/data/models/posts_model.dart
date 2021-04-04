@@ -6,6 +6,9 @@ class PostsModel {
   String user_image;
   String date;
   String uid;
+
+  PostsModel();
+
   PostsModel.fromJson(Map<String, dynamic> map) {
     tag = map['tag'];
     content = map['content'];

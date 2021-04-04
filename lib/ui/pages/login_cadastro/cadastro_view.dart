@@ -17,7 +17,7 @@ class CadastroView extends StatelessWidget {
         appBar: AppBar(
           title: Text('Cadastro'),
         ),
-        body: Obx(()=>LoadingUtil(
+        body: Obx(() => LoadingUtil(
             widget: SingleChildScrollView(
               child: Container(
                 height: Get.height,
@@ -25,6 +25,8 @@ class CadastroView extends StatelessWidget {
                 child: Column(
                   children: [
                     Obx(() => UserAvatar(
+                      isMiniAvatar: false,
+                      isNetworkImage: false,
                           image: controller.image.value == null
                               ? null
                               : controller.image.value,
