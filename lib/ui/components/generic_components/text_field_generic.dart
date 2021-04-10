@@ -32,10 +32,11 @@ class _GenericTextFieldState extends State<GenericTextField> {
               : false
           : false,
       controller: widget.controller,
-      
+        
       decoration: InputDecoration(
-          suffix: widget.isPassword == true ? InkWell(
-            child: Icon(Icons.remove_red_eye_sharp),
+        
+          suffixIcon: widget.isPassword == true ? GestureDetector(
+            child: Icon(Icons.remove_red_eye_sharp, ),
             onTap: () {
               setState(() {
                 widget.passwordIsVisible = !widget.passwordIsVisible;

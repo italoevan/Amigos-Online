@@ -31,6 +31,6 @@ class AppPages {
     GetPage(
         name: Routes.COMENTS,
         page: () => ComentsView(),
-        binding: ComentsBinding())
+        bindings:[ ComentsBinding(), UserProviderBinding()])
   ];
 }

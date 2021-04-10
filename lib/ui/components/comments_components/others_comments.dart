@@ -9,11 +9,13 @@ class OthersComments extends StatelessWidget {
   final ComentsController controller;
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return OtherCommentsItem();
-      },
+    return Expanded(
+          child: ListView.builder(
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Text("a");
+        },
+      ),
     );
   }
 }

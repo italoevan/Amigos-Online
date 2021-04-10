@@ -1,4 +1,5 @@
 import 'package:amigos_online/controller/coments/coments_controller.dart';
+import 'package:amigos_online/ui/components/comments_components/NavigationBarItem.dart';
 import 'package:amigos_online/ui/components/comments_components/main_comment.dart';
 import 'package:amigos_online/ui/components/comments_components/others_comments.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,16 @@ class ComentsView extends StatelessWidget {
             MainComent(
               model: controller.model,
               controller: controller,
+              newPostController: controller.newPostController,
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: NavigationBarItem(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }

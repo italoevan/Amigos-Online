@@ -1,7 +1,7 @@
 import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/ui/components/home_components/body/mini_user_avatar.dart';
-import 'package:amigos_online/utils/generic_utils/text_field_generic.dart';
+import 'package:amigos_online/ui/components/generic_components/text_field_generic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
