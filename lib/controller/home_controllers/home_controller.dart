@@ -129,8 +129,7 @@ class HomeController extends GetxController {
         .get();
 
     String counter = postsCount.data()['n_posts'].toString();
-    print(counter + "aAAAAAAAAAAAAAAAAAAAAA");
-    print(counter);
+
     await firebaseFirestore
         .collection('users')
         .doc(postsModel.user_id)

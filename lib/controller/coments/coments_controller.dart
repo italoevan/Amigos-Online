@@ -21,20 +21,37 @@ class ComentsController extends GetxController {
   UserModel userModel;
   var isLoading = false.obs;
 
+  var otherComentshasLoaded = false.obs;
+  List<ComentsPostsModel> list = [];
+
   @override
-  void onInit() {
+  void onInit() async {
+    model = Get.arguments["posts_model"];
+    otherComentshasLoaded.value = await getOthersUsersComments();
     userModel = userProviderController.userModel;
 
-    model = Get.arguments["posts_model"];
     super.onInit();
   }
 
-  Future getOthersUsersComments() async {
-    var response = await firestore
-        .collection('all_posts')
-        .doc(model.uid)
-        .collection('coments')
-        .get();
+  Future<bool> getOthersUsersComments() async {
+    try {
+      var response = await firestore
+          .collection('all_posts')
+          .doc(model.uid)
+          .collection('coments')
+          .orderBy('date', descending: true)
+          .get();
+
+      List<ComentsPostsModel> postList = [];
+      response.docs.forEach((element) {
+        postList.add(ComentsPostsModel.fromJson(element.data()));
+      });
+      list = postList;
+
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future newComments() async {
@@ -72,11 +89,11 @@ class ComentsController extends GetxController {
           .then((value) {
         Get.snackbar("Oba!", "Sucesso ao comentar");
       });
+      otherComentshasLoaded.value = false;
+      otherComentshasLoaded.value = await getOthersUsersComments();
 
       print(modelJson);
-    } else {
-      verification();
-    }
+    } else {}
   }
 
   bool verification() {
