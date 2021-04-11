@@ -15,11 +15,13 @@ class PostsArea extends StatelessWidget {
             child: ListView.builder(
                 itemCount: controller.listPosts.length,
                 itemBuilder: (context, index) {
-                 return PostsItem(model: controller.listPosts[index]);
+                  return PostsItem(model: controller.listPosts[index]);
                 }),
           )
         : Center(
-            child: SpinKitHourGlass(color: Colors.green,),
+            child: SpinKitHourGlass(
+              color: Colors.green,
+            ),
           ));
   }
 }

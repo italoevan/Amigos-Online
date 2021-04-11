@@ -6,13 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NewCommentArea extends StatelessWidget {
-  NewCommentArea({@required this.comentsController, @required this.newPostController});
-
-  final UserProviderController userController =
-      Get.find<UserProviderController>();
-
+  NewCommentArea(
+      {@required this.comentsController, @required this.newPostController, @required this.userProviderController});
+  final UserProviderController userProviderController;
   final ComentsController comentsController;
- final TextEditingController newPostController;
+  final TextEditingController newPostController;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class NewCommentArea extends StatelessWidget {
             children: [
               MiniUserAvatar(
                 hasNetworkImage: true,
-                networkImage: userController.userModel.user_image,
+                networkImage: userProviderController.userModel.user_image,
               ),
               VerticalDivider(),
               Expanded(child: GenericTextField(controller: newPostController))

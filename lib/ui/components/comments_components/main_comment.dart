@@ -1,5 +1,6 @@
 import 'package:amigos_online/controller/coments/coments_controller.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
+import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/ui/components/comments_components/new_comment_area.dart';
 import 'package:amigos_online/ui/components/comments_components/others_comments.dart';
 import 'package:amigos_online/ui/components/home_components/body/mini_user_avatar.dart';
@@ -8,9 +9,10 @@ import 'package:get/get.dart';
 
 class MainComent extends StatelessWidget {
   final ComentsController controller;
-  MainComent({@required this.model, @required this.controller, @required this.newPostController});
+  MainComent({@required this.model, @required this.controller, @required this.newPostController, @required this.userProviderController});
   final PostsModel model;
   final TextEditingController newPostController;
+  final UserProviderController userProviderController;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -60,7 +62,7 @@ class MainComent extends StatelessWidget {
                 Text(model.content),
                 Divider(),
                 OthersComments(model: model, controller: controller,),
-                NewCommentArea(comentsController: controller,newPostController: newPostController,)
+                NewCommentArea(comentsController: controller,newPostController: newPostController,userProviderController: userProviderController,)
               ],
             ),
           ),

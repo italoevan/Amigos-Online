@@ -5,6 +5,8 @@ class ComentsPostsModel {
   String content;
   String date;
 
+  ComentsPostsModel();
+
   ComentsPostsModel.fromJson(Map<String, dynamic> map) {
     user_name = map['user_name'];
     user_id = map['user_id'];
