@@ -25,7 +25,7 @@ class ComentsItem extends StatelessWidget {
                 )
               : Divider(),
           GestureDetector(
-            onTap: (){}, //Open profile
+            onTap:() async => controller.getUserInformationToOpenProfile(model), //Open profile
             child: Row(
               children: [
                 MiniUserAvatar(

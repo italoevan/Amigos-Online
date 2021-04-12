@@ -205,6 +205,33 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             Text("Desabafo")
                           ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Radio(
+                                value: 5,
+                                groupValue: atualTagChoose.value,
+                                onChanged: changeRadioValue),
+                            Text("Política")
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Radio(
+                                value: 6,
+                                groupValue: atualTagChoose.value,
+                                onChanged: changeRadioValue),
+                            Text("Séries")
+                          ],
+                        ),
+                        Expanded(
+                                                  child: Align(
+                            alignment: Alignment.bottomCenter,
+                                                    child: ElevatedButton(
+                                onPressed: () => Get.back(), child: Text("Pronto")),
+                          ),
                         )
                       ],
                     ))));

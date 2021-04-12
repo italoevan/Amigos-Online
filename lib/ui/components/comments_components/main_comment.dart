@@ -22,6 +22,8 @@ class MainComent extends StatelessWidget {
     return Expanded(
       child: Container(
         child: Card(
+          shadowColor: Colors.green,
+          elevation: 5,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(16))),
           child: Container(
@@ -31,39 +33,50 @@ class MainComent extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
-                  children: [
-                    Row(children: [
-                      MiniUserAvatar(
-                        hasNetworkImage: true,
-                        networkImage: model.user_image,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text(model.user_name)
-                    ]),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                Container(
+                  padding: EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.green),
+                      borderRadius: BorderRadius.circular(16)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
-                          Container(
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(16)),
-                            height: 30,
-                            child: Text(model.tag),
+                          Row(children: [
+                            MiniUserAvatar(
+                              hasNetworkImage: true,
+                              networkImage: model.user_image,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(model.user_name)
+                          ]),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(16)),
+                                  height: 30,
+                                  child: Text(model.tag),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
-                    )
-                  ],
+                      Divider(
+                        color: Colors.transparent,
+                      ),
+                      Text(model.content),
+                    ],
+                  ),
                 ),
-                Divider(
-                  color: Colors.transparent,
-                ),
-                Text(model.content),
                 Divider(),
                 OthersComments(
                   model: model,

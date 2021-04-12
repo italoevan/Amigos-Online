@@ -5,6 +5,7 @@ import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/data/repository/other_comments_repository/other_comments_repository.dart';
 import 'package:amigos_online/providers/user_provider.dart';
+import 'package:amigos_online/routes/app_routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
@@ -80,6 +81,7 @@ class ComentsController extends GetxController {
       //post in user profile
 
       try {
+        otherComentshasLoaded.value = false;
         await firestore
             .collection('users')
             .doc(model.user_id)
@@ -102,7 +104,7 @@ class ComentsController extends GetxController {
           Get.snackbar("Oba!", "Sucesso ao comentar");
         });
 
-        otherComentshasLoaded.value = false;
+        
         otherComentshasLoaded.value = await getOthersUsersComments();
       } catch (e) {
         Get.snackbar("Atenção", "Erro ao fazer o comentário :(");
@@ -122,7 +124,21 @@ class ComentsController extends GetxController {
     }
   }
 
-  Future getUserInformationToOpenProfile(ComentsPostsModel postsModel) async {
+  Future getUserInformationToOpenProfile(
+      ComentsPostsModel comentsPostsModel) async {
+    isLoading.value = true;
     UserModel _userModel = UserModel();
+
+    var response = await firestore
+        .collection('users')
+        .doc(comentsPostsModel.user_id)
+        .get();
+    _userModel = UserModel.fromJson(response.data());
+
+    isLoading.value = false;
+    Get.toNamed(
+      Routes.USERPROFILE,
+      arguments: {"isOwnProfile": false, "userModel": _userModel},
+    );
   }
 }

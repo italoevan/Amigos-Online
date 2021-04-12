@@ -3,6 +3,7 @@ import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/ui/components/comments_components/NavigationBarItem.dart';
 import 'package:amigos_online/ui/components/comments_components/main_comment.dart';
 import 'package:amigos_online/ui/components/comments_components/others_comments.dart';
+import 'package:amigos_online/utils/generic_utils/loading_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,22 +26,24 @@ class _ComentsViewState extends State<ComentsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Comentários")),
-      body: Container(
-        padding: EdgeInsets.all(32),
-        height: Get.height,
-        width: Get.width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            MainComent(
-              userProviderController: userProviderController,
-              model: controller.model,
-              controller: controller,
-              newPostController: controller.newPostController,
+      body: Obx(() => LoadingUtil(
+          loading: controller.isLoading.value,
+          widget: Container(
+            padding: EdgeInsets.all(32),
+            height: Get.height,
+            width: Get.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                MainComent(
+                  userProviderController: userProviderController,
+                  model: controller.model,
+                  controller: controller,
+                  newPostController: controller.newPostController,
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ))),
       bottomNavigationBar: NavigationBarItem(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Obx(() => FloatingActionButton(

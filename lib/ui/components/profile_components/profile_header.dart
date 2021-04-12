@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileHeader extends StatelessWidget {
-  ProfileHeader({@required this.model, @required this.controller, @required this.isOwnProfile});
+  ProfileHeader(
+      {@required this.model,
+      @required this.controller,
+      @required this.isOwnProfile});
   final UserProfileController controller;
   final UserModel model;
   final bool isOwnProfile;
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,21 @@ class ProfileHeader extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                UserAvatar(
-                  isNetworkImage: true,
-                  networkImage: model.user_image,
+                GestureDetector(
+                  onTap: () {
+                    Get.dialog(AlertDialog(
+                      contentPadding: EdgeInsets.all(0),
+                      content: Container(
+                        width: Get.width * 0.8,
+                        height: Get.height * 0.5,
+                        child: Image.network(model.user_image, fit: BoxFit.cover,),
+                      ),
+                    ));
+                  },
+                  child: UserAvatar(
+                    isNetworkImage: true,
+                    networkImage: model.user_image,
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -41,11 +55,15 @@ class ProfileHeader extends StatelessWidget {
                         ? Text(controller.userName.value,
                             style: TextStyle(color: Colors.black, fontSize: 25))
                         : Text("Usuario")),
-                   isOwnProfile ? IconButton(
-                      icon: Icon(Icons.settings),
-                      onPressed: controller.openDialogToChangeName,
-                      color: Colors.red,
-                    ) : SizedBox(height: 0,)
+                    isOwnProfile
+                        ? IconButton(
+                            icon: Icon(Icons.settings),
+                            onPressed: controller.openDialogToChangeName,
+                            color: Colors.red,
+                          )
+                        : SizedBox(
+                            height: 0,
+                          )
                   ],
                 ),
                 Container(
