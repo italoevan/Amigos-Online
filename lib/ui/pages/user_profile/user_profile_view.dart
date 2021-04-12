@@ -1,9 +1,6 @@
 import 'package:amigos_online/controller/user_profile_controllers/user_profile_controller.dart';
-import 'package:amigos_online/data/models/user_model.dart';
-import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/ui/components/profile_components/posts_area.dart';
 import 'package:amigos_online/ui/components/profile_components/profile_header.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

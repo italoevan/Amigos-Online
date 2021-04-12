@@ -9,21 +9,23 @@ import 'package:get/get.dart';
 
 class MainComent extends StatelessWidget {
   final ComentsController controller;
-  MainComent({@required this.model, @required this.controller, @required this.newPostController, @required this.userProviderController});
+  MainComent(
+      {@required this.model,
+      @required this.controller,
+      @required this.newPostController,
+      @required this.userProviderController});
   final PostsModel model;
   final TextEditingController newPostController;
   final UserProviderController userProviderController;
   @override
   Widget build(BuildContext context) {
     return Expanded(
-          child: Container(
-          
+      child: Container(
         child: Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(16))),
           child: Container(
             padding: EdgeInsets.only(top: 12, right: 12, left: 12),
-           
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(topRight: Radius.circular(16))),
             child: Column(
@@ -58,11 +60,20 @@ class MainComent extends StatelessWidget {
                     )
                   ],
                 ),
-                Divider(),
+                Divider(
+                  color: Colors.transparent,
+                ),
                 Text(model.content),
                 Divider(),
-                OthersComments(model: model, controller: controller,),
-                NewCommentArea(comentsController: controller,newPostController: newPostController,userProviderController: userProviderController,)
+                OthersComments(
+                  model: model,
+                  controller: controller,
+                ),
+                NewCommentArea(
+                  comentsController: controller,
+                  newPostController: newPostController,
+                  userProviderController: userProviderController,
+                )
               ],
             ),
           ),

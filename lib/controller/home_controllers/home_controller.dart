@@ -108,15 +108,14 @@ class HomeController extends GetxController {
 
   Future<UserModel> getOtherUserInformation(PostsModel model) async {
     isLoading.value = true;
-    try{
-    var response =
-        await firebaseFirestore.collection('users').doc(model.user_id).get();
+    try {
+      var response =
+          await firebaseFirestore.collection('users').doc(model.user_id).get();
 
-    UserModel otherUserModel = UserModel.fromJson(response.data());
-    isLoading.value = false;
-    return otherUserModel;
-    }
-    catch(e){
+      UserModel otherUserModel = UserModel.fromJson(response.data());
+      isLoading.value = false;
+      return otherUserModel;
+    } catch (e) {
       isLoading.value = false;
       return null;
     }

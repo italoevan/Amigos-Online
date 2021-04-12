@@ -123,8 +123,8 @@ class UserProfileController extends GetxController {
     try {
       var response = await firestore
           .collection('users')
-          .doc(model.user_id).
-          collection('posts')
+          .doc(model.user_id)
+          .collection('posts')
           .orderBy('date', descending: true)
           .get();
 

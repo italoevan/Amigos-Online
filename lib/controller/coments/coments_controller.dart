@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amigos_online/data/models/coments_posts_model.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
@@ -22,6 +24,7 @@ class ComentsController extends GetxController {
   var isLoading = false.obs;
 
   var otherComentshasLoaded = false.obs;
+  final scrollController = ScrollController();
   List<ComentsPostsModel> list = [];
 
   @override
@@ -39,7 +42,7 @@ class ComentsController extends GetxController {
           .collection('all_posts')
           .doc(model.uid)
           .collection('coments')
-          .orderBy('date', descending: true)
+          .orderBy('date', descending: false)
           .get();
 
       List<ComentsPostsModel> postList = [];
@@ -47,11 +50,18 @@ class ComentsController extends GetxController {
         postList.add(ComentsPostsModel.fromJson(element.data()));
       });
       list = postList;
-
+      jumpToEndOfList();
       return true;
     } catch (e) {
       return false;
     }
+  }
+
+  void jumpToEndOfList() {
+    Timer(
+        Duration(milliseconds: 400),
+        () => scrollController
+            .jumpTo(scrollController.position.maxScrollExtent + 50));
   }
 
   Future newComments() async {
@@ -69,31 +79,35 @@ class ComentsController extends GetxController {
 
       //post in user profile
 
-      await firestore
-          .collection('users')
-          .doc(model.user_id)
-          .collection('posts')
-          .doc(model.uid)
-          .collection('coments')
-          .doc(date.toString())
-          .set(modelJson);
+      try {
+        await firestore
+            .collection('users')
+            .doc(model.user_id)
+            .collection('posts')
+            .doc(model.uid)
+            .collection('coments')
+            .doc(date.toString())
+            .set(modelJson);
 
-      //post in all_posts
+        //post in all_posts
 
-      await firestore
-          .collection('all_posts')
-          .doc(model.uid)
-          .collection('coments')
-          .doc(date.toString())
-          .set(modelJson)
-          .then((value) {
-        Get.snackbar("Oba!", "Sucesso ao comentar");
-      });
-      otherComentshasLoaded.value = false;
-      otherComentshasLoaded.value = await getOthersUsersComments();
+        await firestore
+            .collection('all_posts')
+            .doc(model.uid)
+            .collection('coments')
+            .doc(date.toString())
+            .set(modelJson)
+            .then((value) {
+          newPostController.text = "";
+          Get.snackbar("Oba!", "Sucesso ao comentar");
+        });
 
-      print(modelJson);
-    } else {}
+        otherComentshasLoaded.value = false;
+        otherComentshasLoaded.value = await getOthersUsersComments();
+      } catch (e) {
+        Get.snackbar("Atenção", "Erro ao fazer o comentário :(");
+      }
+    }
   }
 
   bool verification() {
@@ -106,5 +120,9 @@ class ComentsController extends GetxController {
     } else {
       return true;
     }
+  }
+
+  Future getUserInformationToOpenProfile(ComentsPostsModel postsModel) async {
+    UserModel _userModel = UserModel();
   }
 }
