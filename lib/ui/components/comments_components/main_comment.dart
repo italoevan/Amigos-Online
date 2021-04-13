@@ -34,7 +34,7 @@ class MainComent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  padding: EdgeInsets.all(4),
+                  padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.green),
                       borderRadius: BorderRadius.circular(16)),

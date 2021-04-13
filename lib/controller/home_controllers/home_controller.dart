@@ -173,7 +173,9 @@ class HomeController extends GetxController {
                                 value: 1,
                                 groupValue: atualTagChoose.value,
                                 onChanged: changeRadioValue),
-                            Text("Amizade")
+                            GestureDetector(
+                                onTap: () => changeRadioValue(1),
+                                child: Text("Amizade"))
                           ],
                         ),
                         Row(
@@ -183,7 +185,9 @@ class HomeController extends GetxController {
                                 value: 2,
                                 groupValue: atualTagChoose.value,
                                 onChanged: changeRadioValue),
-                            Text("Amor")
+                            GestureDetector(
+                                onTap: () => changeRadioValue(2),
+                                child: Text("Amor"))
                           ],
                         ),
                         Row(
@@ -193,7 +197,9 @@ class HomeController extends GetxController {
                                 value: 3,
                                 groupValue: atualTagChoose.value,
                                 onChanged: changeRadioValue),
-                            Text("Cotidiano")
+                            GestureDetector(
+                                onTap: () => changeRadioValue(3),
+                                child: Text("Cotidiano"))
                           ],
                         ),
                         Row(
@@ -203,7 +209,9 @@ class HomeController extends GetxController {
                                 value: 4,
                                 groupValue: atualTagChoose.value,
                                 onChanged: changeRadioValue),
-                            Text("Desabafo")
+                            GestureDetector(
+                                onTap: () => changeRadioValue(4),
+                                child: Text("Desabafo"))
                           ],
                         ),
                         Row(
@@ -213,7 +221,9 @@ class HomeController extends GetxController {
                                 value: 5,
                                 groupValue: atualTagChoose.value,
                                 onChanged: changeRadioValue),
-                            Text("Política")
+                            GestureDetector(
+                                onTap: () => changeRadioValue(5),
+                                child: Text("Política"))
                           ],
                         ),
                         Row(
@@ -223,14 +233,15 @@ class HomeController extends GetxController {
                                 value: 6,
                                 groupValue: atualTagChoose.value,
                                 onChanged: changeRadioValue),
-                            Text("Séries")
+                            GestureDetector(onTap:()=>changeRadioValue(6),child: Text("Séries"))
                           ],
                         ),
                         Expanded(
-                                                  child: Align(
+                          child: Align(
                             alignment: Alignment.bottomCenter,
-                                                    child: ElevatedButton(
-                                onPressed: () => Get.back(), child: Text("Pronto")),
+                            child: ElevatedButton(
+                                onPressed: () => Get.back(),
+                                child: Text("Pronto")),
                           ),
                         )
                       ],

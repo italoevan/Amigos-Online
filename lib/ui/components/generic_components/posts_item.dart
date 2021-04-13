@@ -2,6 +2,7 @@ import 'package:amigos_online/controller/posts_item_controller/posts_item_contro
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/components/generic_components/user_avatar.dart';
+import 'package:amigos_online/utils/generic_utils/timestamp_to_date.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +46,9 @@ class PostsItem extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     color: Colors.green,
                                     borderRadius: BorderRadius.circular(10)),
-                                child: Text(" " + model.tag.toUpperCase()))
+                                child: Text(" " + model.tag.toUpperCase())),
+                            VerticalDivider(),
+                            Text(TimeStampToDate.convert(model.date))
                           ],
                         ))
                       ],
@@ -66,7 +69,8 @@ class PostsItem extends StatelessWidget {
                             if (snapshot.hasData) {
                               return FlatButton(
                                   onPressed: () {
-                                    Get.toNamed(Routes.COMENTS, arguments: {"posts_model" : model});
+                                    Get.toNamed(Routes.COMENTS,
+                                        arguments: {"posts_model": model});
                                   },
                                   child: Text("Comentar (${snapshot.data})"));
                             } else {
