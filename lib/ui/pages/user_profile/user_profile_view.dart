@@ -1,3 +1,4 @@
+import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/controller/user_profile_controllers/user_profile_controller.dart';
 import 'package:amigos_online/ui/components/profile_components/posts_area.dart';
 import 'package:amigos_online/ui/components/profile_components/profile_header.dart';
@@ -47,7 +48,9 @@ class UserProfileView extends StatelessWidget {
                           controller: userController,
                           model: userController.model,
                         ),
-                        PostsArea(controller: userController)
+                        PostsArea(
+                            
+                            controller: userController)
                       ],
                     ))
                   ],
@@ -86,6 +89,7 @@ class UserProfileView extends StatelessWidget {
                             ),
                             Expanded(
                               child: PostsArea(
+                             
                                 controller: userController,
                               ),
                             )

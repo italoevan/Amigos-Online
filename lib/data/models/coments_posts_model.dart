@@ -3,6 +3,7 @@ class ComentsPostsModel {
   String user_id;
   String user_image;
   String content;
+  String uid;
   String date;
 
   ComentsPostsModel();
@@ -12,6 +13,7 @@ class ComentsPostsModel {
     user_id = map['user_id'];
     user_image = map['user_image'];
     content = map['content'];
+    uid = map['uid'];
     date = map['date'];
   }
 
@@ -21,6 +23,7 @@ class ComentsPostsModel {
       "user_id": user_id,
       "user_image": user_image,
       "content": content,
+      "uid" : uid,
       "date": date
     };
     return map;

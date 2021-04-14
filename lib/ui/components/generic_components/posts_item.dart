@@ -1,3 +1,4 @@
+import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/controller/posts_item_controller/posts_item_controller.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/routes/app_routes.dart';
@@ -7,10 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PostsItem extends StatelessWidget {
-  PostsItem({@required this.model, this.onNameTap});
+  PostsItem(
+      {@required this.model, this.onNameTap});
   final PostsModel model;
   final Function onNameTap;
   final PostsItemController controller = Get.put(PostsItemController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,14 +44,19 @@ class PostsItem extends StatelessWidget {
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Container(
-                                padding: EdgeInsets.all(3),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Text(" " + model.tag.toUpperCase())),
-                            VerticalDivider(),
-                            Text(TimeStampToDate.convert(model.date))
+                            Column(
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.all(3),
+                                    decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Text(" " + model.tag.toUpperCase())),
+                                Divider(),
+                                Text(TimeStampToDate.convert(model.date))
+                              ],
+                            ),
                           ],
                         ))
                       ],
@@ -69,8 +77,9 @@ class PostsItem extends StatelessWidget {
                             if (snapshot.hasData) {
                               return FlatButton(
                                   onPressed: () {
-                                    Get.toNamed(Routes.COMENTS,
-                                        arguments: {"posts_model": model});
+                                    Get.toNamed(Routes.COMENTS, arguments: {
+                                      "posts_model": model,
+                                    });
                                   },
                                   child: Text("Comentar (${snapshot.data})"));
                             } else {

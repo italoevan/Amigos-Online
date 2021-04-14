@@ -6,10 +6,8 @@ import 'package:amigos_online/ui/components/home_components/body/home_posts_area
 import 'package:amigos_online/ui/components/home_components/body/mini_user_avatar.dart';
 import 'package:amigos_online/ui/components/home_components/body/new_post_area.dart';
 import 'package:amigos_online/utils/generic_utils/loading_util.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   final HomeController controller = Get.find<HomeController>();

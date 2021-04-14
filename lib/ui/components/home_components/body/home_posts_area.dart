@@ -18,12 +18,14 @@ class HomePostsArea extends StatelessWidget {
                 itemCount: controller.listPosts.length,
                 itemBuilder: (context, index) {
                   return PostsItem(
+    
                     model: controller.listPosts[index],
                     onNameTap: () async {
                       UserModel model = await controller
                           .getOtherUserInformation(controller.listPosts[index]);
 
                       Get.toNamed(Routes.USERPROFILE, arguments: {
+                        "homeController": controller,
                         "userModel": model,
                         "isOwnProfile": false
                       });

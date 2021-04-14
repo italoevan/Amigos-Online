@@ -66,7 +66,7 @@ class NewPostArea extends StatelessWidget {
             Divider(),
             Center(
                 child: RaisedButton(
-              onPressed: controller.newPost,
+              onPressed:()=>  controller.newPost(context),
               child: Text("Postar"),
             ))
           ],

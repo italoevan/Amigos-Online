@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/data/models/coments_posts_model.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
@@ -23,7 +24,7 @@ class ComentsController extends GetxController {
 
   UserModel userModel;
   var isLoading = false.obs;
-
+  HomeController homeController;
   var otherComentshasLoaded = false.obs;
   final scrollController = ScrollController();
   List<ComentsPostsModel> list = [];
@@ -65,10 +66,11 @@ class ComentsController extends GetxController {
             .jumpTo(scrollController.position.maxScrollExtent + 50));
   }
 
-  Future newComments() async {
+  Future newComments(BuildContext context) async {
     if (verification()) {
-      var date = Timestamp.now();
-
+      isLoading.value = true;
+      var uid = Timestamp.now();
+      var date = DateTime.now();
       ComentsPostsModel comentModel = ComentsPostsModel();
       comentModel.user_id = userModel.user_id;
       comentModel.user_image = userModel.user_image;
@@ -88,7 +90,7 @@ class ComentsController extends GetxController {
             .collection('posts')
             .doc(model.uid)
             .collection('coments')
-            .doc(date.toString())
+            .doc(uid.toString())
             .set(modelJson);
 
         //post in all_posts
@@ -97,16 +99,17 @@ class ComentsController extends GetxController {
             .collection('all_posts')
             .doc(model.uid)
             .collection('coments')
-            .doc(date.toString())
+            .doc(uid.toString())
             .set(modelJson)
             .then((value) {
           newPostController.text = "";
           Get.snackbar("Oba!", "Sucesso ao comentar");
+          isLoading.value = false;
         });
-
-        
+        FocusScope.of(context).unfocus();
         otherComentshasLoaded.value = await getOthersUsersComments();
       } catch (e) {
+        isLoading.value = false;
         Get.snackbar("Atenção", "Erro ao fazer o comentário :(");
       }
     }

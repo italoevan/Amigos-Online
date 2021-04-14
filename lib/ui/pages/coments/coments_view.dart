@@ -1,4 +1,5 @@
 import 'package:amigos_online/controller/coments/coments_controller.dart';
+import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/ui/components/comments_components/NavigationBarItem.dart';
 import 'package:amigos_online/ui/components/comments_components/main_comment.dart';
@@ -14,6 +15,7 @@ class ComentsView extends StatefulWidget {
 
 class _ComentsViewState extends State<ComentsView> {
   final ComentsController controller = Get.find<ComentsController>();
+
   UserProviderController userProviderController;
 
   @override
@@ -36,6 +38,7 @@ class _ComentsViewState extends State<ComentsView> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 MainComent(
+                  homeController: controller.homeController,
                   userProviderController: userProviderController,
                   model: controller.model,
                   controller: controller,
@@ -52,8 +55,9 @@ class _ComentsViewState extends State<ComentsView> {
             child: Icon(
               Icons.add,
             ),
-            onPressed:
-                controller.isLoading.value ? null : controller.newComments,
+            onPressed: () => controller.isLoading.value
+                ? null
+                : controller.newComments(context),
           )),
     );
   }

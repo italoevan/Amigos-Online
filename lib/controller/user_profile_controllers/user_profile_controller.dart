@@ -1,3 +1,4 @@
+import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/providers/user_provider.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class UserProfileController extends GetxController {
+
   final UserModel model =
       Get.arguments["userModel"]; //Use-se aso seja o proprio perfil
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -26,6 +28,7 @@ class UserProfileController extends GetxController {
 
   @override
   void onInit() async {
+
     hasNameLoaded.value = await getUserName();
     hasPostCountLoaded.value = await getPostsCount();
     hasPostsLoaded.value = await getUserPosts();
@@ -125,7 +128,7 @@ class UserProfileController extends GetxController {
           .collection('users')
           .doc(model.user_id)
           .collection('posts')
-          .orderBy('date', descending: true)
+          .orderBy('uid', descending: true)
           .get();
 
       List<PostsModel> postList = [];

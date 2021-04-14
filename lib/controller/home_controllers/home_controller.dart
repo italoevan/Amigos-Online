@@ -38,13 +38,13 @@ class HomeController extends GetxController {
     userModel = userProviderController.userModel;
   }
 
-  Future newPost() async {
+  Future newPost(BuildContext context) async {
     await getUserInformation();
     if (verification()) {
       isLoading.value = true;
-      var date = Timestamp.now();
-
-      print(date);
+      var uid = Timestamp.now();
+      var date = DateTime.now();
+      print(uid);
 
       PostsModel postsModel = PostsModel();
       postsModel.user_id = userModel.user_id;
@@ -53,7 +53,7 @@ class HomeController extends GetxController {
       postsModel.content = newPostController.value.text;
       postsModel.user_name = userModel.name;
       postsModel.date = date.toString();
-      postsModel.uid = date.toString();
+      postsModel.uid = uid.toString();
 
       var modelJson = postsModel.toJson();
 
@@ -62,18 +62,19 @@ class HomeController extends GetxController {
             .collection('users')
             .doc(postsModel.user_id)
             .collection('posts')
-            .doc(postsModel.date)
+            .doc(postsModel.uid)
             .set(modelJson);
 
         await firebaseFirestore
             .collection("all_posts")
-            .doc(postsModel.date)
+            .doc(postsModel.uid)
             .set(modelJson);
 
         await refreshPostsCount(postsModel);
 
         Get.snackbar("OBA!", "Sucesso ao postar");
         newPostController.value.text = "";
+        FocusScope.of(context).unfocus();
         isLoading.value = false;
         hasPostsLoaded.value = false;
         hasPostsLoaded.value = await getHomePosts();
@@ -233,7 +234,9 @@ class HomeController extends GetxController {
                                 value: 6,
                                 groupValue: atualTagChoose.value,
                                 onChanged: changeRadioValue),
-                            GestureDetector(onTap:()=>changeRadioValue(6),child: Text("Séries"))
+                            GestureDetector(
+                                onTap: () => changeRadioValue(6),
+                                child: Text("Séries"))
                           ],
                         ),
                         Expanded(
