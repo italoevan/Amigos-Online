@@ -38,7 +38,6 @@ class _ComentsViewState extends State<ComentsView> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 MainComent(
-                  homeController: controller.homeController,
                   userProviderController: userProviderController,
                   model: controller.model,
                   controller: controller,

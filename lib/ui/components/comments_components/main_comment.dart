@@ -2,6 +2,7 @@ import 'package:amigos_online/controller/coments/coments_controller.dart';
 import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/providers/user_provider.dart';
+import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/components/comments_components/new_comment_area.dart';
 import 'package:amigos_online/ui/components/comments_components/others_comments.dart';
 import 'package:amigos_online/ui/components/home_components/body/mini_user_avatar.dart';
@@ -15,10 +16,9 @@ class MainComent extends StatelessWidget {
       @required this.controller,
       @required this.newPostController,
       @required this.userProviderController,
-      @required this.homeController
-      });
+     });
   final PostsModel model;
-  final HomeController homeController;
+
   final TextEditingController newPostController;
   final UserProviderController userProviderController;
   @override
@@ -47,16 +47,24 @@ class MainComent extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Row(children: [
-                            MiniUserAvatar(
-                              hasNetworkImage: true,
-                              networkImage: model.user_image,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(model.user_name)
-                          ]),
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.USERPROFILE, arguments: {
+                                "isOwnProfile": false,
+                                "userModel" : true
+                              });
+                            },
+                            child: Row(children: [
+                              MiniUserAvatar(
+                                hasNetworkImage: true,
+                                networkImage: model.user_image,
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(model.user_name)
+                            ]),
+                          ),
                           Expanded(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,

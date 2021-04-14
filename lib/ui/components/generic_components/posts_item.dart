@@ -1,4 +1,4 @@
-import 'package:amigos_online/controller/home_controllers/home_controller.dart';
+
 import 'package:amigos_online/controller/posts_item_controller/posts_item_controller.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/routes/app_routes.dart';
@@ -8,8 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PostsItem extends StatelessWidget {
-  PostsItem(
-      {@required this.model, this.onNameTap});
+  PostsItem({@required this.model, this.onNameTap});
   final PostsModel model;
   final Function onNameTap;
   final PostsItemController controller = Get.put(PostsItemController());
@@ -19,6 +18,8 @@ class PostsItem extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(left: 12, right: 12),
       child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           child: Container(
               padding: EdgeInsets.all(8),
               child: Container(
