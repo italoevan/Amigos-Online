@@ -44,7 +44,7 @@ class ComentsController extends GetxController {
           .collection('all_posts')
           .doc(model.uid)
           .collection('coments')
-          .orderBy('date', descending: false)
+          .orderBy('uid', descending: false)
           .get();
 
       List<ComentsPostsModel> postList = [];
@@ -59,16 +59,23 @@ class ComentsController extends GetxController {
     }
   }
 
-  void jumpToEndOfList() {
-    Timer(
-        Duration(milliseconds: 400),
-        () => scrollController
-            .jumpTo(scrollController.position.maxScrollExtent + 50));
+  void jumpToEndOfList() async {
+    Timer(Duration(milliseconds: 400), () {
+      if (otherComentshasLoaded.value == true) {
+        if (list.length == 0) {
+          print("Empty");
+        } else {
+          Timer(
+              Duration(milliseconds: 400),
+              () => scrollController
+                  .jumpTo(scrollController.position.maxScrollExtent + 50));
+        }
+      }
+    });
   }
 
   Future newComments(BuildContext context) async {
     if (verification()) {
-      isLoading.value = true;
       var uid = Timestamp.now();
       var date = DateTime.now();
       ComentsPostsModel comentModel = ComentsPostsModel();
@@ -83,7 +90,7 @@ class ComentsController extends GetxController {
       //post in user profile
 
       try {
-        otherComentshasLoaded.value = false;
+        isLoading.value = true;
         await firestore
             .collection('users')
             .doc(model.user_id)
@@ -104,12 +111,12 @@ class ComentsController extends GetxController {
             .then((value) {
           newPostController.text = "";
           Get.snackbar("Oba!", "Sucesso ao comentar");
-          isLoading.value = false;
         });
         FocusScope.of(context).unfocus();
+        isLoading.value = false;
+        otherComentshasLoaded.value = false;
         otherComentshasLoaded.value = await getOthersUsersComments();
       } catch (e) {
-        isLoading.value = false;
         Get.snackbar("Atenção", "Erro ao fazer o comentário :(");
       }
     }

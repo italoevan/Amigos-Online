@@ -12,20 +12,43 @@ class OthersComments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => controller.otherComentshasLoaded.value
-        ? Expanded(
-            child: ListView.builder(
-              controller: controller.scrollController,
-              itemCount: controller.list.length,
-              itemBuilder: (context, index) {
-                return ComentsItem(
-                  controller: controller,
-                  model: controller.list[index],
-                  index: index,
-                  length: controller.list.length,
-                );
-              },
-            ),
-          )
+        ? controller.list.length == 0
+            ? controller.isLoading.value
+                ? Expanded(child: Container())
+                : Expanded(
+                    child: Container(
+                    child: Center(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/bad-review.png',
+                              height: 70,
+                              width: 70,
+                            ),
+                            Text(
+                              "Sem comentários ainda  :( ",
+                              style: TextStyle(fontSize: 13),
+                              textAlign: TextAlign.center,
+                            )
+                          ]),
+                    ),
+                  ))
+            : Expanded(
+                child: ListView.builder(
+                  controller: controller.scrollController,
+                  itemCount: controller.list.length,
+                  itemBuilder: (context, index) {
+                    return ComentsItem(
+                      controller: controller,
+                      model: controller.list[index],
+                      index: index,
+                      length: controller.list.length,
+                    );
+                  },
+                ),
+              )
         : Expanded(
             child: Container(
                 child: Center(

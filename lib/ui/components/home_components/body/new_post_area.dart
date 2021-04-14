@@ -46,7 +46,7 @@ class NewPostArea extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(bottom: 18),
-                                  child: MiniUserAvatar(
+                  child: MiniUserAvatar(
                     controller: userController,
                   ),
                 ),
@@ -65,10 +65,16 @@ class NewPostArea extends StatelessWidget {
             ),
             Divider(),
             Center(
-                child: RaisedButton(
-              onPressed:()=>  controller.newPost(context),
+                child: SizedBox(
+                  width: 110,
+                                  child: RaisedButton(
+                    color: Colors.blueAccent,
+              shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+              onPressed: () => controller.newPost(context),
               child: Text("Postar"),
-            ))
+            ),
+                ))
           ],
         ),
       ),

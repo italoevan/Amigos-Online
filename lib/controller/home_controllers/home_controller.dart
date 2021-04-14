@@ -91,7 +91,7 @@ class HomeController extends GetxController {
     try {
       var response = await firebaseFirestore
           .collection("all_posts")
-          .orderBy("date", descending: true)
+          .orderBy("uid", descending: true)
           .get();
       List<PostsModel> modelPostList = [];
 
@@ -242,9 +242,18 @@ class HomeController extends GetxController {
                         Expanded(
                           child: Align(
                             alignment: Alignment.bottomCenter,
-                            child: ElevatedButton(
-                                onPressed: () => Get.back(),
-                                child: Text("Pronto")),
+                            child: SizedBox(
+                              width: 110,
+                                                          child: ElevatedButton(
+                                
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                    primary: Colors.blueAccent
+                                  ),
+                                  onPressed: () => Get.back(),
+                                
+                                  child: Text("Pronto")),
+                            ),
                           ),
                         )
                       ],
