@@ -8,6 +8,7 @@ import 'package:amigos_online/ui/components/home_components/body/new_post_area.d
 import 'package:amigos_online/utils/generic_utils/loading_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeView extends StatelessWidget {
   final HomeController controller = Get.find<HomeController>();

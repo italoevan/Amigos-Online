@@ -2,6 +2,7 @@ import 'package:amigos_online/binding/cadastro_binding/cadastro_binding.dart';
 import 'package:amigos_online/binding/coments/coments_binding.dart';
 import 'package:amigos_online/binding/home_binding/home_binding.dart';
 import 'package:amigos_online/binding/home_binding/user_provider_binding.dart';
+import 'package:amigos_online/binding/login_binding/login_binding.dart';
 import 'package:amigos_online/binding/user_profile_binding/user_profile_binding.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/pages/coments/coments_view.dart';
@@ -19,7 +20,8 @@ class AppPages {
         name: Routes.HOME,
         page: () => HomeView(),
         bindings: [HomeBinding(), UserProviderBinding()]),
-    GetPage(name: Routes.LOGIN, page: () => LoginView()),
+    GetPage(
+        name: Routes.LOGIN, page: () => LoginView(), binding: LoginBinding()),
     GetPage(
         name: Routes.CADASTRO,
         page: () => CadastroView(),
@@ -31,6 +33,6 @@ class AppPages {
     GetPage(
         name: Routes.COMENTS,
         page: () => ComentsView(),
-        bindings:[ ComentsBinding(), UserProviderBinding()])
+        bindings: [ComentsBinding(), UserProviderBinding()])
   ];
 }

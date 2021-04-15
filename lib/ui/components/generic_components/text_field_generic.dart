@@ -7,8 +7,7 @@ class GenericTextField extends StatefulWidget {
       this.hasHint,
       this.textHint,
       this.isPassword,
-      this.maxLength
-      });
+      this.maxLength});
   final bool hasHint;
   final String error;
   final String textHint;
@@ -25,24 +24,26 @@ class _GenericTextFieldState extends State<GenericTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      maxLength:widget.maxLength ,
+      maxLength: widget.maxLength,
       obscureText: widget.isPassword != null
           ? !widget.passwordIsVisible
               ? true
               : false
           : false,
       controller: widget.controller,
-        
       decoration: InputDecoration(
-        
-          suffixIcon: widget.isPassword == true ? GestureDetector(
-            child: Icon(Icons.remove_red_eye_sharp, ),
-            onTap: () {
-              setState(() {
-                widget.passwordIsVisible = !widget.passwordIsVisible;
-              });
-            },
-          ) : null,
+          suffixIcon: widget.isPassword == true
+              ? GestureDetector(
+                  child: Icon(
+                    Icons.remove_red_eye_sharp,
+                  ),
+                  onTap: () {
+                    setState(() {
+                      widget.passwordIsVisible = !widget.passwordIsVisible;
+                    });
+                  },
+                )
+              : null,
           hintText: widget.hasHint != null ? widget.textHint : null,
           errorText: widget.error != null ? widget.error : null,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12))),

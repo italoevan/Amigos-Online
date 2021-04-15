@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeController extends GetxController {
   var profileImageHasLoaded = false.obs;
@@ -24,6 +25,8 @@ class HomeController extends GetxController {
 
   List<PostsModel> listPosts;
   var hasPostsLoaded = false.obs;
+
+  RefreshController refreshController =RefreshController(initialRefresh: false);
 
   UserModel userModel;
   @override
