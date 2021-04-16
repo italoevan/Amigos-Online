@@ -9,10 +9,12 @@ class UserAvatar extends StatelessWidget {
       this.networkImage,
       this.isNetworkImage,
       this.isMiniAvatar,
+      this.hasBorder,
       this.boxFit});
   final File image;
   final String networkImage;
   final BoxFit boxFit;
+  bool hasBorder = false;
   bool isMiniAvatar = false;
   bool isNetworkImage = false;
   @override
@@ -21,6 +23,10 @@ class UserAvatar extends StatelessWidget {
         ? Padding(
             padding: EdgeInsets.all(5),
             child: Container(
+              decoration: hasBorder == true ? BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(100)
+              ) : null,
                 height: isMiniAvatar == true ? 50 : 125,
                 width: isMiniAvatar == true ? 50 : 125,
                 child: ClipRRect(
@@ -28,7 +34,7 @@ class UserAvatar extends StatelessWidget {
                   child: Image.network(
                     networkImage,
                     height: isMiniAvatar == true ? 50 : 125,
-                    width:isMiniAvatar == true ? 50 : 125 ,
+                    width: isMiniAvatar == true ? 50 : 125,
                     fit: boxFit != null ? boxFit : BoxFit.cover,
                   ),
                 )),

@@ -44,6 +44,7 @@ class ProfileHeader extends StatelessWidget {
                     ));
                   },
                   child: UserAvatar(
+                    hasBorder: true,
                     isNetworkImage: true,
                     networkImage: model.user_image,
                   ),
