@@ -4,10 +4,8 @@ import 'package:amigos_online/data/repository/cadastro_repository/cadastro_repos
 import 'package:amigos_online/data/repository/cadastro_repository/nick_name_firebase_repository.dart';
 import 'package:amigos_online/data/repository/cadastro_repository/user_avatar_repository.dart';
 import 'package:amigos_online/routes/app_routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 import 'package:image_picker/image_picker.dart';

@@ -23,7 +23,7 @@ class HomeDrawer extends StatelessWidget {
                   icon: Icon(Icons.logout),
                   onPressed: () {
                     controller.auth.signOut();
-                    Get.offAllNamed(Routes.CADASTRO);
+                    Get.offAllNamed(Routes.LOGIN);
                   })
             ],
           ),

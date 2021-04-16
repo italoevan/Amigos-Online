@@ -5,9 +5,14 @@ import 'package:flutter/material.dart';
 
 class UserAvatar extends StatelessWidget {
   UserAvatar(
-      {this.image, this.networkImage, this.isNetworkImage, this.isMiniAvatar});
+      {this.image,
+      this.networkImage,
+      this.isNetworkImage,
+      this.isMiniAvatar,
+      this.boxFit});
   final File image;
   final String networkImage;
+  final BoxFit boxFit;
   bool isMiniAvatar = false;
   bool isNetworkImage = false;
   @override
@@ -22,7 +27,9 @@ class UserAvatar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                   child: Image.network(
                     networkImage,
-                    fit: BoxFit.cover,
+                    height: isMiniAvatar == true ? 50 : 125,
+                    width:isMiniAvatar == true ? 50 : 125 ,
+                    fit: boxFit != null ? boxFit : BoxFit.cover,
                   ),
                 )),
           )

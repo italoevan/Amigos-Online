@@ -1,4 +1,4 @@
-import 'package:amigos_online/controller/cadastro/cadastro_controller.dart';
+import 'package:amigos_online/controller/cadastro_controller/cadastro_controller.dart';
 import 'package:amigos_online/data/provider/cadastro_providers/cadastro_provider.dart';
 import 'package:amigos_online/data/provider/cadastro_providers/nickname_firebase_provider.dart';
 import 'package:amigos_online/data/provider/cadastro_providers/user_avatar_provider.dart';
