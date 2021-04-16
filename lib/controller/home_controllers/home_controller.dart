@@ -26,7 +26,10 @@ class HomeController extends GetxController {
   List<PostsModel> listPosts;
   var hasPostsLoaded = false.obs;
 
-  RefreshController refreshController =RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+
+  var newPostIsOpen = false.obs;
 
   UserModel userModel;
   @override
@@ -247,14 +250,13 @@ class HomeController extends GetxController {
                             alignment: Alignment.bottomCenter,
                             child: SizedBox(
                               width: 110,
-                                                          child: ElevatedButton(
-                                
+                              child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                                    primary: Colors.blueAccent
-                                  ),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16)),
+                                      primary: Colors.blueAccent),
                                   onPressed: () => Get.back(),
-                                
                                   child: Text("Pronto")),
                             ),
                           ),

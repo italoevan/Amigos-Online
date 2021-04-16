@@ -25,21 +25,38 @@ class NewPostArea extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              
               children: [
-                Obx(() => InkWell(
-                      onTap: controller.openDialogToChooseTag,
+                GestureDetector(
+                      onTap: () {
+                        controller.newPostIsOpen.value = false;
+                      },
                       child: Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(16)),
                         height: 30,
-                        child: Text(controller.atualTagChoose.value == 0
-                            ? "Escolha a tag"
-                            : controller.userChose.value.toString()),
+                        width: 30,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(100)),
+                        child: Icon(Icons.close),
                       ),
-                    ))
+                    ),
+                Expanded(
+                                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [ Obx(() => InkWell(
+                        onTap: controller.openDialogToChooseTag,
+                        child: Container(
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(16)),
+                          height: 30,
+                          child: Text(controller.atualTagChoose.value == 0
+                              ? "Escolha a tag"
+                              : controller.userChose.value.toString()),
+                        ),
+                      ))],),
+                )
               ],
             ),
             Row(
@@ -65,16 +82,17 @@ class NewPostArea extends StatelessWidget {
             ),
             Divider(),
             Center(
-                child: SizedBox(
-                  width: 110,
-                                  child: RaisedButton(
-                    color: Colors.blueAccent,
-              shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-              onPressed: () => controller.newPost(context),
-              child: Text("Postar"),
+              child: SizedBox(
+                width: 110,
+                child: RaisedButton(
+                  color: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  onPressed: () => controller.newPost(context),
+                  child: Text("Postar"),
+                ),
+              ),
             ),
-                ))
           ],
         ),
       ),

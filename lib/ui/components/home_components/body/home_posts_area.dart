@@ -14,24 +14,26 @@ class HomePostsArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => controller.hasPostsLoaded.value
-        ? Expanded(
+        ? Flexible(
             child: SmartRefresher(
               controller: controller.refreshController,
-              onRefresh: () async{
+              onRefresh: () async {
                 controller.hasPostsLoaded.value = false;
-                        controller.hasPostsLoaded.value =
-                            await controller.getHomePosts();
-                        controller.refreshController.refreshCompleted();
-                        return;
+                controller.hasPostsLoaded.value =
+                    await controller.getHomePosts();
+                controller.refreshController.refreshCompleted();
+                return;
               },
-                          child: ListView.builder(
+              child: ListView.builder(
                   itemCount: controller.listPosts.length,
+                  shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return PostsItem(
                       model: controller.listPosts[index],
                       onNameTap: () async {
-                        UserModel model = await controller
-                            .getOtherUserInformation(controller.listPosts[index]);
+                        UserModel model =
+                            await controller.getOtherUserInformation(
+                                controller.listPosts[index]);
 
                         Get.toNamed(Routes.USERPROFILE, arguments: {
                           "userModel": model,

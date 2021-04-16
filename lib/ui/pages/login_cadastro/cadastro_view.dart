@@ -16,9 +16,11 @@ class CadastroView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: KeyBoardIsOpen.check(context) ? null : AppBar(
-            elevation: 0,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor),
+        appBar: KeyBoardIsOpen.check(context)
+            ? null
+            : AppBar(
+                elevation: 0,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor),
         body: Obx(() => LoadingUtil(
               loading: controller.loading.value,
               widget: Container(

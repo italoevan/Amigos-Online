@@ -6,18 +6,33 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class PostsArea extends StatelessWidget {
-  PostsArea({@required this.controller,});
+  PostsArea({@required this.controller, this.isOwnProfile});
   final UserProfileController controller;
+  bool isOwnProfile = false;
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => controller.hasPostsLoaded.value
         ? Expanded(
-            child: ListView.builder(
-                itemCount: controller.listPosts.length,
-                itemBuilder: (context, index) {
-                  return PostsItem(model: controller.listPosts[index]);
-                }),
+            child: controller.listPosts.length == 0
+                ? Column(
+                    children: [
+                      Container(
+                        child: Image.asset(
+                          'assets/images/bad-review.png',
+                          height: 140,
+                          width: 140,
+                        ),
+                      ),
+                      Divider(color: Colors.transparent),
+                      Text("Nenhuma publicação ainda :( ")
+                    ],
+                  )
+                : ListView.builder(
+                    itemCount: controller.listPosts.length,
+                    itemBuilder: (context, index) {
+                      return PostsItem(model: controller.listPosts[index]);
+                    }),
           )
         : Center(
             child: SpinKitHourGlass(

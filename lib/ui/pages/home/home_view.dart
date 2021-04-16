@@ -1,6 +1,8 @@
 import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/routes/app_routes.dart';
+import 'package:amigos_online/ui/components/generic_components/generic_button.dart';
+import 'package:amigos_online/ui/components/home_components/body/new_post_button.dart';
 import 'package:amigos_online/ui/components/home_components/drawer/drawer_home.dart';
 import 'package:amigos_online/ui/components/home_components/body/home_posts_area.dart';
 import 'package:amigos_online/ui/components/home_components/body/mini_user_avatar.dart';
@@ -8,7 +10,6 @@ import 'package:amigos_online/ui/components/home_components/body/new_post_area.d
 import 'package:amigos_online/utils/generic_utils/loading_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeView extends StatelessWidget {
   final HomeController controller = Get.find<HomeController>();
@@ -44,13 +45,25 @@ class HomeView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(24),
-                  child: NewPostArea(
-                    userController: userController,
-                    controller: controller,
-                  ),
-                ),
+                controller.newPostIsOpen.value
+                    ? Padding(
+                        padding: EdgeInsets.all(24),
+                        child: NewPostArea(
+                          userController: userController,
+                          controller: controller,
+                        ),
+                      )
+                    : Padding(
+                        padding: EdgeInsets.all(24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            NewPostButton(
+                                onTap: () =>
+                                    controller.newPostIsOpen.value = true)
+                          ],
+                        ),
+                      ),
                 Divider(),
                 HomePostsArea(
                   controller: controller,
