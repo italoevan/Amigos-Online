@@ -14,36 +14,32 @@ class HomePostsArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => controller.hasPostsLoaded.value
-        ? Flexible(
-            child: SmartRefresher(
-              controller: controller.refreshController,
-              onRefresh: () async {
-                controller.hasPostsLoaded.value = false;
-                controller.hasPostsLoaded.value =
-                    await controller.getHomePosts();
-                controller.refreshController.refreshCompleted();
-                return;
-              },
-              child: ListView.builder(
-                  itemCount: controller.listPosts.length,
-                  shrinkWrap: true,
-                  controller: controller.scrollController,
-                  itemBuilder: (context, index) {
-                    return PostsItem(
-                      model: controller.listPosts[index],
-                      onNameTap: () async {
-                        UserModel model =
-                            await controller.getOtherUserInformation(
-                                controller.listPosts[index]);
+        ? SmartRefresher(
+            controller: controller.refreshController,
+            onRefresh: () async {
+              controller.hasPostsLoaded.value = false;
+              controller.hasPostsLoaded.value = await controller.getHomePosts();
+              controller.refreshController.refreshCompleted();
+              return;
+            },
+            child: ListView.builder(
+                itemCount: controller.listPosts.length,
+                shrinkWrap: true,
+                controller: controller.scrollController,
+                itemBuilder: (context, index) {
+                  return PostsItem(
+                    model: controller.listPosts[index],
+                    onNameTap: () async {
+                      UserModel model = await controller
+                          .getOtherUserInformation(controller.listPosts[index]);
 
-                        Get.toNamed(Routes.USERPROFILE, arguments: {
-                          "userModel": model,
-                          "isOwnProfile": false
-                        });
-                      },
-                    );
-                  }),
-            ),
+                      Get.toNamed(Routes.USERPROFILE, arguments: {
+                        "userModel": model,
+                        "isOwnProfile": false
+                      });
+                    },
+                  );
+                }),
           )
         : Center(
             child: SpinKitHourGlass(

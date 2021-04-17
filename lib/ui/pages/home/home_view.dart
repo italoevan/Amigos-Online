@@ -1,7 +1,6 @@
 import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/routes/app_routes.dart';
-import 'package:amigos_online/ui/components/generic_components/generic_button.dart';
 import 'package:amigos_online/ui/components/home_components/body/generic_action_button.dart';
 import 'package:amigos_online/ui/components/home_components/body/new_post_button.dart';
 import 'package:amigos_online/ui/components/home_components/drawer/drawer_home.dart';
@@ -23,10 +22,10 @@ class HomeView extends StatelessWidget {
         controller: userController,
       ),
       appBar: AppBar(
-        title: Text("Amigos Online", style: TextStyle(
-          fontFamily: 'Quantum'
-
-        ),),
+        title: Text(
+          "Amigos Online",
+          style: TextStyle(fontFamily: 'Quantum'),
+        ),
         actions: [
           MiniUserAvatar(
             controller: userController,
@@ -62,18 +61,38 @@ class HomeView extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            GenericActionButton(title: "Posts quentes", onTap: (){}),
+                            GenericActionButton(
+                                title: "Posts quentes", onTap: () {}),
                             NewPostButton(
                                 onTap: () =>
                                     controller.newPostIsOpen.value = true),
-                                     GenericActionButton(title: "CATEGORIAS", onTap: (){}),
+                            GenericActionButton(
+                                title: "CATEGORIAS",
+                                onTap: () => controller.pageController
+                                    .animateToPage(1,
+                                        curve: Curves.easeInCirc,
+                                        duration: Duration(milliseconds: 300))),
                           ],
                         ),
                       ),
                 Divider(),
-                HomePostsArea(
-                  controller: controller,
+                Flexible(
+                  child: PageView(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: controller.pageController,
+                    children: [
+                      HomePostsArea(controller: controller),
+                      Container(color: Colors.yellow,child: Text("Posts Quentes"),),
+                      Container(
+                        color: Colors.red,
+                        child: Text("A"),
+                      )
+                    ],
+                  ),
                 )
+                /*HomePostsArea(
+                  controller: controller,
+                ) */
               ],
             ),
           ),

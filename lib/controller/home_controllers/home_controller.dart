@@ -35,6 +35,8 @@ class HomeController extends GetxController {
 
   ScrollController scrollController = ScrollController();
   var scrollPosition = 0.0.obs;
+
+  PageController pageController = PageController();
   @override
   void onInit() async {
     getUserInformation();
