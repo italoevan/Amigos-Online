@@ -29,7 +29,7 @@ class HomeController extends GetxController {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
-  var newPostIsOpen = false.obs;
+  var newPostIsOpen = true.obs;
 
   UserModel userModel;
 

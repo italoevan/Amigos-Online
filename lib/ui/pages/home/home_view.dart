@@ -2,6 +2,7 @@ import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/components/generic_components/generic_button.dart';
+import 'package:amigos_online/ui/components/home_components/body/generic_action_button.dart';
 import 'package:amigos_online/ui/components/home_components/body/new_post_button.dart';
 import 'package:amigos_online/ui/components/home_components/drawer/drawer_home.dart';
 import 'package:amigos_online/ui/components/home_components/body/home_posts_area.dart';
@@ -56,11 +57,13 @@ class HomeView extends StatelessWidget {
                     : Padding(
                         padding: EdgeInsets.all(24),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            GenericActionButton(title: "Posts quentes", onTap: (){}),
                             NewPostButton(
                                 onTap: () =>
-                                    controller.newPostIsOpen.value = true)
+                                    controller.newPostIsOpen.value = true),
+                                     GenericActionButton(title: "CATEGORIAS", onTap: (){}),
                           ],
                         ),
                       ),
