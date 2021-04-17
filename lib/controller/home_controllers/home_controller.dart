@@ -45,17 +45,13 @@ class HomeController extends GetxController {
   }
 
   void newPostShowOnTop() {
-    if (scrollController.position.pixels ==
+    if (scrollController.position.pixels !=
         scrollController.position.minScrollExtent) {
-      if (newPostIsOpen.value == false) {
-        newPostIsOpen.value = true;
-        // Perform your task;
-      }
-    } else {
       if (newPostIsOpen.value == true) {
         newPostIsOpen.value = false;
+        // Perform your task;
       }
-    }
+    } 
   }
 
   getUserInformation() async {
