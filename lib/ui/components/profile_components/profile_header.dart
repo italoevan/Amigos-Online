@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:amigos_online/controller/user_profile_controllers/user_profile_controller.dart';
@@ -14,6 +15,7 @@ class ProfileHeader extends StatelessWidget {
   final UserProfileController controller;
   final UserModel model;
   final bool isOwnProfile;
+  var animateContainer = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -71,31 +73,77 @@ class ProfileHeader extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 5),
-                  padding: EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10)),
-                  height: 50,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  height: 65,
+                  child: Stack(
                     children: [
-                      Column(
-                        children: [
-                          Text(
-                            "Posts:",
-                            style: TextStyle(color: Colors.black),
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 5),
+                          padding: EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10)),
+                          height: 50,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    "Posts:",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  Obx(() => controller.hasPostCountLoaded.value
+                                      ? Text(
+                                          controller.userPostsCount.value
+                                              .toString(),
+                                          style: TextStyle(color: Colors.black))
+                                      : Text(""))
+                                ],
+                              ),
+                            ],
                           ),
-                          Obx(() => controller.hasPostCountLoaded.value
-                              ? Text(controller.userPostsCount.value.toString(),
-                                  style: TextStyle(color: Colors.black))
-                              : Text(""))
-                        ],
+                        ),
                       ),
+                      Obx(() => Align(
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                  highlightColor: Colors.red,
+                                  onTap: () {
+                                    animateContainer.value = true;
+                                    Timer(Duration(milliseconds: 100),
+                                        () => animateContainer.value = false);
+                                  },
+                                  child: AnimatedContainer(
+                                    duration: Duration(milliseconds: 300),
+                                    height: animateContainer.value ? 40 : 50,
+                                    width: animateContainer.value ? 40 : 50,
+                                    decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 7,
+                                              color: Colors.black)
+                                        ],
+                                        border: Border.all(color: Colors.green),
+                                        borderRadius:
+                                            BorderRadius.circular(100)),
+                                    child: Image.asset(
+                                      'assets/images/social_network.png',
+                                      height: 50,
+                                      width: 50,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ))
                     ],
                   ),
-                ),
+                )
               ],
             ),
           )

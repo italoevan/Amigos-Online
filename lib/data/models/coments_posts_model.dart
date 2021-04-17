@@ -23,7 +23,7 @@ class ComentsPostsModel {
       "user_id": user_id,
       "user_image": user_image,
       "content": content,
-      "uid" : uid,
+      "uid": uid,
       "date": date
     };
     return map;
