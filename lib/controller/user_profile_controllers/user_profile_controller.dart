@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class UserProfileController extends GetxController {
 
@@ -26,6 +27,8 @@ class UserProfileController extends GetxController {
 
   List<PostsModel> listPosts;
 
+
+  RefreshController refreshController = RefreshController();
   @override
   void onInit() async {
 

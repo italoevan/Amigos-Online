@@ -13,6 +13,6 @@ void main() async {
     initialRoute: Routes.INITIAL,
     getPages: AppPages.pages,
     defaultTransition: Transition.cupertino,
-    theme: AppTheme.whiteTheme,
+    theme: AppTheme.dark,
   ));
 }

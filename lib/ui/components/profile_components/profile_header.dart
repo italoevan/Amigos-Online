@@ -39,7 +39,10 @@ class ProfileHeader extends StatelessWidget {
                       content: Container(
                         width: Get.width * 0.8,
                         height: Get.height * 0.5,
-                        child: Image.network(model.user_image, fit: BoxFit.cover,),
+                        child: Image.network(
+                          model.user_image,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ));
                   },
@@ -89,10 +92,10 @@ class ProfileHeader extends StatelessWidget {
                                   style: TextStyle(color: Colors.black))
                               : Text(""))
                         ],
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           )

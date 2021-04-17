@@ -23,7 +23,10 @@ class HomeView extends StatelessWidget {
         controller: userController,
       ),
       appBar: AppBar(
-        title: Text("Amigos Online"),
+        title: Text("Amigos Online", style: TextStyle(
+          fontFamily: 'Quantum'
+
+        ),),
         actions: [
           MiniUserAvatar(
             controller: userController,

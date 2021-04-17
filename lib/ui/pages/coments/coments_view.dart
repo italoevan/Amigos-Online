@@ -27,7 +27,12 @@ class _ComentsViewState extends State<ComentsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Comentários")),
+      appBar: AppBar(
+        title: Text(
+          "COMENTÁRIOS",
+          style: TextStyle(fontFamily: 'Quantum'),
+        ),
+      ),
       body: Obx(() => LoadingUtil(
           loading: controller.isLoading.value,
           widget: Container(
@@ -49,14 +54,15 @@ class _ComentsViewState extends State<ComentsView> {
       bottomNavigationBar: NavigationBarItem(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Obx(() => FloatingActionButton(
-          backgroundColor:
-              controller.isLoading.value ? Colors.grey[600] : Colors.green,
-          child: Icon(
-            Icons.add,
-          ),
-          onPressed:()=> controller.isLoading.value
+            backgroundColor:
+                controller.isLoading.value ? Colors.grey[600] : Colors.green,
+            child: Icon(
+              Icons.add,
+            ),
+            onPressed: () => controller.isLoading.value
                 ? null
-                : controller.newComments(context),)),
+                : controller.newComments(context),
+          )),
     );
   }
 }

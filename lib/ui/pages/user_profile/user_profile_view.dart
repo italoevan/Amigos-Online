@@ -15,7 +15,7 @@ class UserProfileView extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("PERFIL"),
+          title: Text("PERFIL", style: TextStyle(fontFamily: 'Quantum'),),
         ),
         body: isOwnProfile == true
             ? Container(
