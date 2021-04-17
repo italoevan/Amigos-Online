@@ -36,14 +36,19 @@ class HomeController extends GetxController {
   ScrollController scrollController = ScrollController();
   var scrollPosition = 0.0.obs;
 
-  PageController pageController = PageController();
+  PageController pageController = PageController(initialPage: 1);
+  var atualPage = 1.obs;
   @override
   void onInit() async {
     getUserInformation();
     hasPostsLoaded.value = await getHomePosts();
-
+    pageController.addListener(pageControllerListener);
     scrollController.addListener(newPostShowOnTop);
     super.onInit();
+  }
+
+   pageControllerListener() {
+    atualPage.value = pageController.page.toInt();
   }
 
   void newPostShowOnTop() {
@@ -53,7 +58,7 @@ class HomeController extends GetxController {
         newPostIsOpen.value = false;
         // Perform your task;
       }
-    } 
+    }
   }
 
   getUserInformation() async {
