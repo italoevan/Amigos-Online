@@ -23,10 +23,11 @@ class UserAvatar extends StatelessWidget {
         ? Padding(
             padding: EdgeInsets.all(5),
             child: Container(
-              decoration: hasBorder == true ? BoxDecoration(
-                border: Border.all(),
-                borderRadius: BorderRadius.circular(100)
-              ) : null,
+                decoration: hasBorder == true
+                    ? BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(100))
+                    : null,
                 height: isMiniAvatar == true ? 50 : 125,
                 width: isMiniAvatar == true ? 50 : 125,
                 child: ClipRRect(

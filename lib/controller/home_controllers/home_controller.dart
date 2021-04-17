@@ -32,11 +32,30 @@ class HomeController extends GetxController {
   var newPostIsOpen = false.obs;
 
   UserModel userModel;
+
+  ScrollController scrollController = ScrollController();
+  var scrollPosition = 0.0.obs;
   @override
   void onInit() async {
     getUserInformation();
     hasPostsLoaded.value = await getHomePosts();
+
+    scrollController.addListener(newPostShowOnTop);
     super.onInit();
+  }
+
+  void newPostShowOnTop() {
+    if (scrollController.position.pixels ==
+        scrollController.position.minScrollExtent) {
+      if (newPostIsOpen.value == false) {
+        newPostIsOpen.value = true;
+        // Perform your task;
+      }
+    } else {
+      if (newPostIsOpen.value == true) {
+        newPostIsOpen.value = false;
+      }
+    }
   }
 
   getUserInformation() async {

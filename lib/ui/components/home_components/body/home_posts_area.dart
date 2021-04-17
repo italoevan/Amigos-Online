@@ -27,6 +27,7 @@ class HomePostsArea extends StatelessWidget {
               child: ListView.builder(
                   itemCount: controller.listPosts.length,
                   shrinkWrap: true,
+                  controller: controller.scrollController,
                   itemBuilder: (context, index) {
                     return PostsItem(
                       model: controller.listPosts[index],
