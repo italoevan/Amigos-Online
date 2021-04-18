@@ -51,6 +51,7 @@ class HomeView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Divider(),
                 Expanded(
                   child: PageView(
                     physics: NeverScrollableScrollPhysics(),

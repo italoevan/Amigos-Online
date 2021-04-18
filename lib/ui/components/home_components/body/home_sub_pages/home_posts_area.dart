@@ -26,9 +26,10 @@ class HomePostsArea extends StatelessWidget {
             child: ListView.builder(
                 itemCount: controller.listPosts.length,
                 shrinkWrap: true,
-                controller: controller.scrollController,
                 itemBuilder: (context, index) {
                   return PostsItem(
+                    index: index,
+                    lenght: controller.listPosts.length,
                     model: controller.listPosts[index],
                     onNameTap: () async {
                       var atualUser = GetAtualUserId().getUserId();

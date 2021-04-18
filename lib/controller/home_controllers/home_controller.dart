@@ -33,8 +33,7 @@ class HomeController extends GetxController {
 
   UserModel userModel;
 
-  ScrollController scrollController = ScrollController();
-  var scrollPosition = 0.0.obs;
+  
 
   PageController pageController = PageController(initialPage: 1);
   var atualPage = 1.obs;
@@ -42,24 +41,11 @@ class HomeController extends GetxController {
   void onInit() async {
     getUserInformation();
     hasPostsLoaded.value = await getHomePosts();
-    pageController.addListener(pageControllerListener);
-    scrollController.addListener(newPostShowOnTop);
+ 
     super.onInit();
   }
 
-   pageControllerListener() {
-    atualPage.value = pageController.page.toInt();
-  }
-
-  void newPostShowOnTop() {
-    if (scrollController.position.pixels !=
-        scrollController.position.minScrollExtent) {
-      if (newPostIsOpen.value == true) {
-        newPostIsOpen.value = false;
-        // Perform your task;
-      }
-    }
-  }
+ 
 
   getUserInformation() async {
     await userProviderController.getUserInformations();

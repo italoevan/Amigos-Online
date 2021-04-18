@@ -7,15 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PostsItem extends StatelessWidget {
-  PostsItem({@required this.model, this.onNameTap});
+  PostsItem({@required this.model, this.onNameTap, this.lenght, this.index});
   final PostsModel model;
   final Function onNameTap;
+  final int index;
+  final int lenght;
   final PostsItemController controller = Get.put(PostsItemController());
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 12, right: 12),
+      margin: lenght != null && index != null
+          ? lenght == index + 1
+              ? EdgeInsets.only(left: 12, right: 12, bottom: 80)
+              : EdgeInsets.only(left: 12, right: 12)
+          : EdgeInsets.only(left: 12, right: 12),
       child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
