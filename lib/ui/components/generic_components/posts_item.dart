@@ -1,4 +1,3 @@
-
 import 'package:amigos_online/controller/posts_item_controller/posts_item_controller.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/routes/app_routes.dart';

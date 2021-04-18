@@ -49,6 +49,7 @@ class ProfileHeader extends StatelessWidget {
                     ));
                   },
                   child: UserAvatar(
+                    borderColor: Colors.green,
                     hasBorder: true,
                     isNetworkImage: true,
                     networkImage: model.user_image,
@@ -81,6 +82,7 @@ class ProfileHeader extends StatelessWidget {
                           margin: EdgeInsets.only(top: 5),
                           padding: EdgeInsets.all(3),
                           decoration: BoxDecoration(
+                            border: Border.all(color:Colors.black),
                               color: Colors.black.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,

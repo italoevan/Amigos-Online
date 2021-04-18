@@ -2,6 +2,7 @@ import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/components/generic_components/posts_item.dart';
+import 'package:amigos_online/utils/firebase_utils/get_atual_user_id.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -30,13 +31,22 @@ class HomePostsArea extends StatelessWidget {
                   return PostsItem(
                     model: controller.listPosts[index],
                     onNameTap: () async {
+                      var atualUser = GetAtualUserId().getUserId();
+
                       UserModel model = await controller
                           .getOtherUserInformation(controller.listPosts[index]);
 
-                      Get.toNamed(Routes.USERPROFILE, arguments: {
-                        "userModel": model,
-                        "isOwnProfile": false
-                      });
+                      if (atualUser == model.user_id) {
+                        Get.toNamed(Routes.USERPROFILE, arguments: {
+                          "userModel": model,
+                          "isOwnProfile": true
+                        });
+                      } else {
+                        Get.toNamed(Routes.USERPROFILE, arguments: {
+                          "userModel": model,
+                          "isOwnProfile": false
+                        });
+                      }
                     },
                   );
                 }),
