@@ -25,7 +25,6 @@ class ProfileHeader extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             margin: EdgeInsets.all(32),
-            height: Get.height * 0.30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(32),
               boxShadow: [BoxShadow(color: Colors.green, blurRadius: 6)],
@@ -82,7 +81,7 @@ class ProfileHeader extends StatelessWidget {
                           margin: EdgeInsets.only(top: 5),
                           padding: EdgeInsets.all(3),
                           decoration: BoxDecoration(
-                            border: Border.all(color:Colors.black),
+                              border: Border.all(color: Colors.black),
                               color: Colors.black.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,

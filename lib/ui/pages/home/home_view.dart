@@ -70,7 +70,7 @@ class HomeView extends StatelessWidget {
             ),
           ),
           loading: controller.isLoading.value)),
-      floatingActionButton: CustomHomeFloatButton(controller: controller),
+      floatingActionButton: CustomHomeFloatButton(controller: controller, userController: userController,),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomBottomNavigation(
         controller: controller,

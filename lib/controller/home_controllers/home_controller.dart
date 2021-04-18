@@ -85,13 +85,15 @@ class HomeController extends GetxController {
             .set(modelJson);
 
         await refreshPostsCount(postsModel);
-
+        atualTagChoose.value = 0;
+        Get.back();
         Get.snackbar("OBA!", "Sucesso ao postar");
         newPostController.value.text = "";
         FocusScope.of(context).unfocus();
         isLoading.value = false;
         hasPostsLoaded.value = false;
         hasPostsLoaded.value = await getHomePosts();
+
         return;
       } catch (e) {
         Get.snackbar("Atenção", "Erro: $e");

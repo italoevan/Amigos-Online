@@ -15,7 +15,7 @@ class GenericButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: onPressed == null ? null : onPressed,
       child: Text(title),
       style: ElevatedButton.styleFrom(
           shadowColor: shadowColor != null ? shadowColor : null,

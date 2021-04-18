@@ -6,93 +6,102 @@ import 'package:amigos_online/ui/components/generic_components/text_field_generi
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class NewPostArea extends StatelessWidget {
-  NewPostArea({@required this.controller, @required this.userController});
+class NewPostArea extends StatefulWidget {
+  NewPostArea(
+      {Key key, @required this.controller, @required this.userController})
+      : super(key: key);
   final HomeController controller;
   final UserProviderController userController;
+
+  @override
+  _NewPostAreaState createState() => _NewPostAreaState();
+}
+
+class _NewPostAreaState extends State<NewPostArea> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      shadowColor: Colors.green,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: Container(
-        padding: EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Row(
-              
-              children: [
-                GestureDetector(
-                      onTap: () {
-                        controller.newPostIsOpen.value = false;
-                      },
-                      child: Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(100)),
-                        child: Icon(Icons.close),
-                      ),
-                    ),
-                Expanded(
-                                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [ Obx(() => InkWell(
-                        onTap: controller.openDialogToChooseTag,
-                        child: Container(
-                          padding: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(16)),
-                          height: 30,
-                          child: Text(controller.atualTagChoose.value == 0
-                              ? "Escolha a tag"
-                              : controller.userChose.value.toString()),
-                        ),
-                      ))],),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 18),
-                  child: MiniUserAvatar(
-                    controller: userController,
-                  ),
-                ),
-                Expanded(
-                    child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Obx(() => GenericTextField(
-                        error: controller.newPostMessageError.value == ""
-                            ? null
-                            : controller.newPostMessageError.value,
-                        maxLength: 75,
-                        controller: controller.newPostController.value,
-                      )),
-                )),
-              ],
-            ),
-            Divider(),
-            Center(
-              child: SizedBox(
-                width: 110,
-                child: GenericButton(
-                  title: "Postar",
-                  onPressed:()=> controller.newPost(context),
+    return Container(
+      key: widget.key,
+      padding: EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(100)),
+                  child: Icon(Icons.close),
                 ),
               ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Obx(() => InkWell(
+                          onTap: widget.controller.openDialogToChooseTag,
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(16)),
+                            height: 30,
+                            child: Text(
+                                widget.controller.atualTagChoose.value == 0
+                                    ? "Escolha a tag"
+                                    : widget.controller.userChose.value
+                                        .toString()),
+                          ),
+                        ))
+                  ],
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 18),
+                child: MiniUserAvatar(
+                  controller: widget.userController,
+                ),
+              ),
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Obx(() => GenericTextField(
+                      error: widget.controller.newPostMessageError.value == ""
+                          ? null
+                          : widget.controller.newPostMessageError.value,
+                      maxLength: 75,
+                      controller: widget.controller.newPostController.value,
+                    )),
+              )),
+            ],
+          ),
+          Divider(),
+          Center(
+            child: SizedBox(
+              width: 110,
+              child: Obx(() => GenericButton(
+                  title: "Postar",
+                  onPressed: widget.controller.isLoading.value == true
+                      ? null
+                      : () => widget.controller.newPost(context)
+                  //widget.controller.newPost(context),
+                  )),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
