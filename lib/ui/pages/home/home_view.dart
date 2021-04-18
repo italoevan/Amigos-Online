@@ -20,6 +20,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       drawer: HomeDrawer(
         controller: userController,
       ),
@@ -50,53 +51,7 @@ class HomeView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                controller.newPostIsOpen.value
-                    ? Padding(
-                        padding: EdgeInsets.all(24),
-                        child: NewPostArea(
-                          userController: userController,
-                          controller: controller,
-                        ),
-                      )
-                    : Padding(
-                        padding: EdgeInsets.all(24),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GenericActionButton(
-                                hasIcon: true,
-                                primaryColor: Colors.green,
-                                icon: Icon(
-                                  Icons.local_fire_department_rounded,
-                                  color: Colors.red,
-                                ),
-                                title: "POSTS ATIVOS",
-                                onTap: () => controller.pageController
-                                    .animateToPage(0,
-                                        curve: Curves.easeInCirc,
-                                        duration: Duration(milliseconds: 300))),
-                            NewPostButton(
-                                controller: controller,
-                                onTap: () {
-                                  controller.pageController.page.toInt() == 1
-                                      ? controller.newPostIsOpen.value = true
-                                      : controller.pageController.animateToPage(
-                                          1,
-                                          duration: Duration(milliseconds: 300),
-                                          curve: Curves.easeInCirc);
-                                }),
-                            GenericActionButton(
-                                title: "CATEGORIAS",
-                                primaryColor: Colors.green,
-                                onTap: () => controller.pageController
-                                    .animateToPage(2,
-                                        curve: Curves.easeInCirc,
-                                        duration: Duration(milliseconds: 300))),
-                          ],
-                        ),
-                      ),
-                Divider(),
-                Flexible(
+                Expanded(
                   child: PageView(
                     physics: NeverScrollableScrollPhysics(),
                     controller: controller.pageController,
@@ -111,6 +66,40 @@ class HomeView extends StatelessWidget {
             ),
           ),
           loading: controller.isLoading.value)),
+      floatingActionButton: FloatingActionButton(
+        elevation: 0,
+        child: Icon(Icons.add),
+        onPressed: () {
+          controller.pageController.page.toInt() == 1
+              ? controller.newPostIsOpen.value = true
+              : controller.pageController.animateToPage(1,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeInCirc);
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.green,
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                  icon: Icon(Icons.local_fire_department_rounded),
+                  onPressed: () => controller.pageController.animateToPage(0,
+                      curve: Curves.easeInCirc,
+                      duration: Duration(milliseconds: 300))),
+              IconButton(
+                  icon: Icon(Icons.list_alt),
+                  onPressed: () => controller.pageController.animateToPage(2,
+                      curve: Curves.easeInCirc,
+                      duration: Duration(milliseconds: 300)))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
