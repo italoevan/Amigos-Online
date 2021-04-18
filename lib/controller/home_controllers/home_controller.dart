@@ -33,19 +33,19 @@ class HomeController extends GetxController {
 
   UserModel userModel;
 
-  
-
   PageController pageController = PageController(initialPage: 1);
   var atualPage = 1.obs;
   @override
   void onInit() async {
     getUserInformation();
     hasPostsLoaded.value = await getHomePosts();
- 
+    pageController.addListener(getAtualPage);
     super.onInit();
   }
 
- 
+  getAtualPage() {
+    atualPage.value = pageController.page.toInt();
+  }
 
   getUserInformation() async {
     await userProviderController.getUserInformations();
