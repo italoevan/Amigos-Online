@@ -29,7 +29,7 @@ class CustomBottomNavigation extends StatelessWidget {
                     duration: Duration(milliseconds: 300)))),
             Obx(() => IconButton(
                 icon: Icon(
-                  Icons.list_alt,
+                  Icons.remove_red_eye,
                   color: controller.atualPage.value == 2
                       ? Colors.red
                       : Colors.white,

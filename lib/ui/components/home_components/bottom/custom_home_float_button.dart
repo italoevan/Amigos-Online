@@ -18,7 +18,7 @@ class CustomHomeFloatButton extends StatelessWidget {
       backgroundColor: Colors.green,
       child: Obx(() => Icon(
             controller.atualPage.value == 1 ? Icons.add : Icons.home,
-            color: controller.atualPage.value == 1 ? Colors.red : Colors.white,
+            color: Colors.white,
           )),
       onPressed: () {
         controller.pageController.page.toInt() == 1
