@@ -19,7 +19,10 @@ class Following extends StatelessWidget {
                         itemCount: controller.listPosts.length,
                         itemBuilder: (context, index) {
                           return PostsItem(model: controller.listPosts[index]);
-                        }))
-                : Container()));
+                        }),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  )));
   }
 }

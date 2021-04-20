@@ -7,6 +7,7 @@ import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/data/repository/other_comments_repository/other_comments_repository.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/routes/app_routes.dart';
+import 'package:amigos_online/utils/firebase_utils/get_atual_user_id.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
@@ -109,9 +110,25 @@ class ComentsController extends GetxController {
             .doc(uid.toString())
             .set(modelJson)
             .then((value) {
-          newPostController.text = "";
-          Get.snackbar("Oba!", "Sucesso ao comentar");
+          if (model.user_id != GetAtualUserId().getUserId()) {
+            print('My post');
+          } else {
+            newPostController.text = "";
+            Get.snackbar("Oba!", "Sucesso ao comentar");
+          }
         });
+
+        if (model.user_id != GetAtualUserId().getUserId()) {
+          await firestore
+              .collection('users')
+              .doc(GetAtualUserId().getUserId())
+              .collection('following')
+              .doc(model.uid)
+              .set({'uid': model.uid}).then((value) {
+            newPostController.text = "";
+            Get.snackbar("Oba!", "Sucesso ao comentar");
+          });
+        }
         FocusScope.of(context).unfocus();
         isLoading.value = false;
         otherComentshasLoaded.value = false;

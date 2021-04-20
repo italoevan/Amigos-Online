@@ -13,37 +13,53 @@ class FollowingController extends GetxController {
   List<PostsModel> listPosts = [];
 
   void onReady() async {
-    postsHasLoaded.value = await getFollowingPosts();
-    super.onInit();
-
     super.onReady();
   }
 
-  Future<bool> getFollowingPosts() async {
+  @override
+  void onInit() async {
+    postsHasLoaded.value = false;
+    postsHasLoaded.value = await getFollowingList();
+    super.onInit();
+  }
+
+  Future<bool> getFollowingList() async {
     String atualUser = GetAtualUserId().getUserId();
     try {
       var response = await firestore
           .collection('users')
           .doc(atualUser)
           .collection('following')
-          .orderBy('uid')
+          .orderBy('uid', descending: true)
           .get();
-      print(response.docs.isEmpty);
 
       if (response.docs.isEmpty) {
         return null;
       }
-
-      List<PostsModel> list = <PostsModel>[];
-
+      List<String> listFollowing = [];
       response.docs.forEach((element) {
-        list.add(PostsModel.fromJson(element.data()));
+        listFollowing.add(element.data()['uid']);
       });
-
-      listPosts = list;
+      listPosts = await getPosts(listFollowing);
       return true;
     } catch (e) {
       return false;
     }
+  }
+
+  Future<List<PostsModel>> getPosts(List<String> list) async {
+    List<PostsModel> _model = [];
+
+    for (int i = 0; i < list.length; i++) {
+      var response = await firestore
+          .collection('all_posts')
+          .where('uid', isEqualTo: list[i])
+          .get();
+      response.docs.forEach((element) {
+        _model.add(PostsModel.fromJson(element.data()));
+      });
+    }
+
+    return _model;
   }
 }
