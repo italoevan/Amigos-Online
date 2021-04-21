@@ -58,6 +58,7 @@ class _ComentsViewState extends State<ComentsView> {
                 controller.isLoading.value ? Colors.grey[600] : Colors.green,
             child: Icon(
               Icons.add,
+              color: Colors.white,
             ),
             onPressed: () => controller.isLoading.value
                 ? null

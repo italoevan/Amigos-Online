@@ -9,6 +9,7 @@ import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/utils/firebase_utils/get_atual_user_id.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dart_notification_center/dart_notification_center.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -111,12 +112,15 @@ class ComentsController extends GetxController {
             .set(modelJson)
             .then((value) {
           if (model.user_id != GetAtualUserId().getUserId()) {
-            print('My post');
+            print(model.user_id + " E ${GetAtualUserId().getUserId()}");
+            print('not my post');
           } else {
             newPostController.text = "";
             Get.snackbar("Oba!", "Sucesso ao comentar");
           }
         });
+
+        //Follow the post
 
         if (model.user_id != GetAtualUserId().getUserId()) {
           await firestore
@@ -127,6 +131,7 @@ class ComentsController extends GetxController {
               .set({'uid': model.uid}).then((value) {
             newPostController.text = "";
             Get.snackbar("Oba!", "Sucesso ao comentar");
+            DartNotificationCenter.post(channel: 'examples');
           });
         }
         FocusScope.of(context).unfocus();

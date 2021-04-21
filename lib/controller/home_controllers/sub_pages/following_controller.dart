@@ -1,7 +1,10 @@
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/utils/firebase_utils/get_atual_user_id.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dart_notification_center/dart_notification_center.dart';
+
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class FollowingController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -12,14 +15,18 @@ class FollowingController extends GetxController {
 
   List<PostsModel> listPosts = [];
 
-  void onReady() async {
-    super.onReady();
-  }
+  RefreshController refreshController = RefreshController();
 
   @override
   void onInit() async {
     postsHasLoaded.value = false;
     postsHasLoaded.value = await getFollowingList();
+
+    DartNotificationCenter.subscribe(
+      channel: 'examples',
+      observer: this,
+      onNotification: (o) async => onRefresh(),
+    );
     super.onInit();
   }
 
@@ -61,5 +68,11 @@ class FollowingController extends GetxController {
     }
 
     return _model;
+  }
+
+  onRefresh() async {
+    postsHasLoaded.value = false;
+    postsHasLoaded.value = await getFollowingList();
+    return;
   }
 }

@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  dart_notification_center:
+    dependency: "direct main"
+    description:
+      name: dart_notification_center
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0+1"
   fake_async:
     dependency: transitive
     description:
