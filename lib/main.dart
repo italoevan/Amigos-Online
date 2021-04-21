@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-   DartNotificationCenter.registerChannel(channel: 'examples');
+  DartNotificationCenter.registerChannel(channel: 'examples');
 
   runApp(GetMaterialApp(
     initialRoute: Routes.INITIAL,

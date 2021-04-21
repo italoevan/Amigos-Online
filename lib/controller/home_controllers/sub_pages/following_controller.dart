@@ -1,4 +1,5 @@
 import 'package:amigos_online/data/models/posts_model.dart';
+import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/utils/firebase_utils/get_atual_user_id.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dart_notification_center/dart_notification_center.dart';
@@ -28,6 +29,21 @@ class FollowingController extends GetxController {
       onNotification: (o) async => onRefresh(),
     );
     super.onInit();
+  }
+
+Future<UserModel> getOtherUserInformation(PostsModel model) async {
+    isLoading.value = true;
+    try {
+      var response =
+          await firestore.collection('users').doc(model.user_id).get();
+
+      UserModel otherUserModel = UserModel.fromJson(response.data());
+      isLoading.value = false;
+      return otherUserModel;
+    } catch (e) {
+      isLoading.value = false;
+      return null;
+    }
   }
 
   Future<bool> getFollowingList() async {
