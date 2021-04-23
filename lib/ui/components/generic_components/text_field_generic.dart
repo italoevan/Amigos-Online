@@ -35,6 +35,9 @@ class _GenericTextFieldState extends State<GenericTextField> {
           suffixIcon: widget.isPassword == true
               ? GestureDetector(
                   child: Icon(
+                    widget.passwordIsVisible ?   
+                    Icons.remove_red_eye_outlined
+                    :
                     Icons.remove_red_eye_sharp,
                   ),
                   onTap: () {

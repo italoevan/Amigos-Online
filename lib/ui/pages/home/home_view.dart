@@ -1,7 +1,7 @@
 import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/routes/app_routes.dart';
-import 'package:amigos_online/ui/components/home_components/body/home_sub_pages/following_sub_page.dart';
+import 'package:amigos_online/ui/components/home_components/body/home_sub_pages/following_sub_page/following_sub_page.dart';
 import 'package:amigos_online/ui/components/home_components/body/home_sub_pages/hot_posts_sub_page.dart';
 import 'package:amigos_online/ui/components/home_components/bottom/custom_bottom_navigation_bar.dart';
 import 'package:amigos_online/ui/components/home_components/bottom/custom_home_float_button.dart';
