@@ -1,16 +1,17 @@
 class SocialNetworkModel {
-  String whatsapp;
+  int whatsapp;
   String facebook;
   String instagram;
   String telegram;
   String tiktok;
 
+  SocialNetworkModel();
   SocialNetworkModel.fromJson(Map<String, dynamic> json) {
-    whatsapp = json['whatsapp'];
-    facebook = json['facebook'];
-    instagram = json['instagram'];
-    telegram = json['telegram'];
-    tiktok = json['tiktok'];
+    whatsapp = json['whatsapp'] != null ? json['whatsapp'] : null;
+    facebook = json['facebook'] != null ? json['facebook'] : null;
+    instagram = json['instagram'] != null ? json['instagram'] : null;
+    telegram = json['telegram'] != null ? json['telegram'] : null;
+    tiktok = json['tiktok'] != null ? json['tiktok'] : null;
   }
 
   Map toJson() {

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:amigos_online/controller/user_profile_controllers/user_profile_controller.dart';
 import 'package:amigos_online/data/models/user_model.dart';
@@ -15,7 +14,7 @@ class ProfileHeader extends StatelessWidget {
   final UserProfileController controller;
   final UserModel model;
   final bool isOwnProfile;
-  var animateContainer = false.obs;
+  final animateContainer = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -114,10 +113,12 @@ class ProfileHeader extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: InkWell(
                                   highlightColor: Colors.red,
-                                  onTap: () {
+                                  onTap: () async{
                                     animateContainer.value = true;
                                     Timer(Duration(milliseconds: 100),
                                         () => animateContainer.value = false);
+                                    controller
+                                        .openCardSocialNetwork(controller);
                                   },
                                   child: AnimatedContainer(
                                     duration: Duration(milliseconds: 300),

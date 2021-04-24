@@ -15,7 +15,7 @@ class UserAvatar extends StatelessWidget {
   final File image;
   final String networkImage;
   final BoxFit boxFit;
-  final Color borderColor ;
+  final Color borderColor;
   bool hasBorder = false;
   bool isMiniAvatar = false;
   bool isNetworkImage = false;
@@ -27,7 +27,10 @@ class UserAvatar extends StatelessWidget {
             child: Container(
                 decoration: hasBorder == true
                     ? BoxDecoration(
-                        border: Border.all(color: borderColor != null ? borderColor : Colors.black ),
+                        border: Border.all(
+                            color: borderColor != null
+                                ? borderColor
+                                : Colors.black),
                         borderRadius: BorderRadius.circular(100))
                     : null,
                 height: isMiniAvatar == true ? 50 : 125,

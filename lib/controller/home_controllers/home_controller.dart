@@ -1,6 +1,7 @@
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/providers/user_provider.dart';
+import 'package:amigos_online/ui/components/generic_components/tags/tags.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -192,7 +193,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(1),
-                                child: Text("Amizade"))
+                                child: Text( Tags.tagsList[0]))
                           ],
                         ),
                         Row(
@@ -204,7 +205,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(2),
-                                child: Text("Amor"))
+                                child: Text( Tags.tagsList[1]))
                           ],
                         ),
                         Row(
@@ -216,7 +217,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(3),
-                                child: Text("Cotidiano"))
+                                child: Text( Tags.tagsList[2]))
                           ],
                         ),
                         Row(
@@ -228,7 +229,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(4),
-                                child: Text("Desabafo"))
+                                child: Text( Tags.tagsList[3]))
                           ],
                         ),
                         Row(
@@ -240,7 +241,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(5),
-                                child: Text("Política"))
+                                child: Text( Tags.tagsList[4]))
                           ],
                         ),
                         Row(
@@ -252,7 +253,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(6),
-                                child: Text("Séries"))
+                                child: Text( Tags.tagsList[5]))
                           ],
                         ),
                         Expanded(
@@ -284,27 +285,27 @@ class HomeController extends GetxController {
 
     switch (atualTagChoose.value) {
       case 1:
-        userChose.value = "AMIZADE";
+        userChose.value = Tags.tagsList[0];
 
         break;
 
       case 2:
-        userChose.value = "AMOR";
+        userChose.value =  Tags.tagsList[1];
 
         break;
 
       case 3:
-        userChose.value = "Cotidiano";
+        userChose.value =  Tags.tagsList[2];
         break;
 
       case 4:
-        userChose.value = "Desabafo";
+        userChose.value =  Tags.tagsList[3];
         break;
       case 5:
-        userChose.value = "Política";
+        userChose.value =  Tags.tagsList[4];
         break;
       case 6:
-        userChose.value = "Séries";
+        userChose.value =  Tags.tagsList[5];
         break;
     }
   }

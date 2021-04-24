@@ -1,16 +1,13 @@
-import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
+import 'package:amigos_online/data/models/social_network_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
-import 'package:amigos_online/providers/user_provider.dart';
+import 'package:amigos_online/ui/components/profile_components/card_social_network.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class UserProfileController extends GetxController {
-
   final UserModel model =
       Get.arguments["userModel"]; //Use-se aso seja o proprio perfil
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -27,11 +24,9 @@ class UserProfileController extends GetxController {
 
   List<PostsModel> listPosts;
 
-
   RefreshController refreshController = RefreshController();
   @override
   void onInit() async {
-
     hasNameLoaded.value = await getUserName();
     hasPostCountLoaded.value = await getPostsCount();
     hasPostsLoaded.value = await getUserPosts();
@@ -146,5 +141,35 @@ class UserProfileController extends GetxController {
     } catch (e) {
       return false;
     }
+  }
+
+  Future<dynamic> getSocialNetwork() async {
+    SocialNetworkModel _socialNetworkModel;
+    var response = await firestore
+        .collection('users')
+        .doc(model.user_id)
+        .collection('social_network')
+        .doc('social_network')
+        .get();
+
+    if (response.data() == null) {
+      print("Caiu no null");
+      return null;
+    }else{
+      _socialNetworkModel = SocialNetworkModel();
+       if (response.data()['whatsapp'] != null) {
+      _socialNetworkModel.whatsapp = response.data()['whatsapp'];
+    }
+
+    }
+
+   
+
+    return _socialNetworkModel;
+  }
+
+  openCardSocialNetwork(UserProfileController profileController) async {
+    await Get.dialog(
+        CardSocialNetwork(await getSocialNetwork(), profileController));
   }
 }
