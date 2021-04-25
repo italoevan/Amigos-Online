@@ -155,15 +155,9 @@ class UserProfileController extends GetxController {
     if (response.data() == null) {
       print("Caiu no null");
       return null;
-    }else{
-      _socialNetworkModel = SocialNetworkModel();
-       if (response.data()['whatsapp'] != null) {
-      _socialNetworkModel.whatsapp = response.data()['whatsapp'];
+    } else {
+      _socialNetworkModel = SocialNetworkModel.fromJson(response.data());
     }
-
-    }
-
-   
 
     return _socialNetworkModel;
   }

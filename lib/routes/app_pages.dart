@@ -11,6 +11,7 @@ import 'package:amigos_online/ui/pages/login_cadastro/cadastro_view.dart';
 import 'package:amigos_online/ui/pages/login_cadastro/login_view.dart';
 import 'package:amigos_online/ui/pages/splash_screen.dart';
 import 'package:amigos_online/ui/pages/user_profile/user_profile_view.dart';
+import 'package:amigos_online/ui/pages/user_profile/user_settings/user_settings_page.dart';
 import 'package:get/get.dart';
 
 class AppPages {
@@ -33,6 +34,7 @@ class AppPages {
     GetPage(
         name: Routes.COMENTS,
         page: () => ComentsView(),
-        bindings: [ComentsBinding(), UserProviderBinding()])
+        bindings: [ComentsBinding(), UserProviderBinding()]),
+    GetPage(name: Routes.USER_SETTINGS, page: () => UserSettings())
   ];
 }

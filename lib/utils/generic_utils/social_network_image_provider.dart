@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SocialNetworkProvider {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-  Future<Map<String, String>> getImages() async {
+abstract class SocialNetworkProvider {
+  static Future<Map<String, dynamic>> getImages() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
     Map<String, dynamic> mapImages = Map();
 
     var response =
