@@ -4,6 +4,7 @@ import 'package:amigos_online/binding/home_binding/home_binding.dart';
 import 'package:amigos_online/binding/home_binding/user_provider_binding.dart';
 import 'package:amigos_online/binding/login_binding/login_binding.dart';
 import 'package:amigos_online/binding/user_profile_binding/user_profile_binding.dart';
+import 'package:amigos_online/binding/user_profile_binding/user_settings_binding/user_settings_binding.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/pages/coments/coments_view.dart';
 import 'package:amigos_online/ui/pages/home/home_view.dart';
@@ -35,6 +36,9 @@ class AppPages {
         name: Routes.COMENTS,
         page: () => ComentsView(),
         bindings: [ComentsBinding(), UserProviderBinding()]),
-    GetPage(name: Routes.USER_SETTINGS, page: () => UserSettings())
+    GetPage(
+        name: Routes.USER_SETTINGS,
+        page: () => UserSettings(),
+        binding: UserSettingsBinding())
   ];
 }

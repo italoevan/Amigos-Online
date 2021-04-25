@@ -75,46 +75,7 @@ class UserProfileController extends GetxController {
     }
   }
 
-  openDialogToChangeName() {
-    showDialog(
-      context: Get.context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return AlertDialog(
-              title: Text("Trocar Apelido"),
-              content: Container(
-                child: TextField(
-                  controller: changeNameController,
-                ),
-              ),
-              actions: <Widget>[
-                FlatButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text("Cancelar"),
-                ),
-                FlatButton(
-                  onPressed: () async {
-                    if (changeNameController.text.length < 5) {
-                      openSnackOnError();
-                    } else if (changeNameController.text.length > 10) {
-                      openSnackOnError();
-                    } else {
-                      //all ok
-                      await changeUserName(changeNameController.text);
-                      model.name = changeNameController.text;
-                      Get.back();
-                    }
-                  },
-                  child: Text("Trocar"),
-                ),
-              ],
-            );
-          },
-        );
-      },
-    );
-  }
+
 
   openSnackOnError() {
     Get.snackbar("Atenção", "Erro ao trocar");
