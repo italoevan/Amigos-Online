@@ -12,7 +12,7 @@ class UserSettings extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Configurações de usuário",
+          "Configurações".toUpperCase(),
           style: TextStyle(fontFamily: 'Quantum'),
         ),
       ),
@@ -24,7 +24,7 @@ class UserSettings extends StatelessWidget {
             SettingsItem(
               icon: Icon(Icons.supervisor_account_sharp),
               title: "Redes Sociais",
-              onTap: () {},
+              onTap: ()=>userSettingsController.showSocialNetworkDialog(context),
             ),
             SettingsItem(
               icon: Icon(Icons.camera_alt),

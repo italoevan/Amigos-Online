@@ -75,8 +75,6 @@ class UserProfileController extends GetxController {
     }
   }
 
-
-
   openSnackOnError() {
     Get.snackbar("Atenção", "Erro ao trocar");
   }
