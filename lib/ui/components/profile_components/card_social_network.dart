@@ -2,7 +2,6 @@ import 'package:amigos_online/controller/user_profile_controllers/user_profile_c
 import 'package:amigos_online/utils/generic_utils/social_network_image_provider.dart';
 import 'package:flutter/material.dart';
 
-
 class CardSocialNetwork extends StatelessWidget {
   CardSocialNetwork(this.socialNetworkModel, this.profileController);
   final UserProfileController profileController;
@@ -14,13 +13,18 @@ class CardSocialNetwork extends StatelessWidget {
       backgroundColor: Colors.transparent,
       contentPadding: EdgeInsets.all(0),
       content: Container(
+        height: socialNetworkModel == null ? null : 152,
         decoration: BoxDecoration(
-            color: Colors.transparent, borderRadius: BorderRadius.circular(16)),
+            color: socialNetworkModel == null
+                ? Colors.transparent
+                : Colors.white.withOpacity(0.4),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.green)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             socialNetworkModel == null
-                ? Text("User sem redes sociais")
+                ? Text("Usuário sem redes sociais")
                 : FutureBuilder(
                     future: SocialNetworkProvider.getImages(),
                     builder:
@@ -34,7 +38,28 @@ class CardSocialNetwork extends StatelessWidget {
                               socialNetworkModel.whatsapp != null
                                   ? Image.network(
                                       snapshot.data['whatsapp'],
+                                      height: 75,
+                                      width: 75,
+                                    )
+                                  : SizedBox(
+                                      height: 0,
+                                      width: 0,
+                                    ),
+                              socialNetworkModel.twitter != null
+                                  ? Image.network(
+                                      snapshot.data['twitter'],
                                       height: 90,
+                                      width: 90,
+                                    )
+                                  : SizedBox(
+                                      height: 0,
+                                      width: 0,
+                                    ),
+                              socialNetworkModel.instagram != null
+                                  ? Image.network(
+                                      snapshot.data['instagram'],
+                                      height: 90,
+                                      width: 90,
                                     )
                                   : SizedBox(
                                       height: 0,
@@ -44,7 +69,8 @@ class CardSocialNetwork extends StatelessWidget {
                           ),
                         );
                       } else {
-                        return CircularProgressIndicator();
+                        return Expanded(
+                            child: Center(child: CircularProgressIndicator()));
                       }
                     })
           ],
