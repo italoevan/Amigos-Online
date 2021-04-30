@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserProfileController extends GetxController {
   final UserModel model =
@@ -124,5 +125,24 @@ class UserProfileController extends GetxController {
   openCardSocialNetwork(UserProfileController profileController) async {
     await Get.dialog(
         CardSocialNetwork(await getSocialNetwork(), profileController));
+  }
+
+  openUrlSocialNetwork(
+      {@required String socialNetork, @required String url}) async {
+    switch (socialNetork) {
+      case 'whatsapp':
+        var whatsappNumber = 'whatsapp://send?phone=$url';
+        await canLaunch(whatsappNumber) ?  launch(whatsappNumber): throw 'Não foi possivel abrir';
+      
+        break;
+
+      case 'instagram':
+        await canLaunch(url) ? launch(url) : throw 'Não foi possivel abrir';
+        break;
+
+      case 'twitter':
+        await canLaunch(url) ? launch(url) : throw 'Não foi possivel abrir';
+        break;
+    }
   }
 }
