@@ -12,7 +12,6 @@ class HomeController extends GetxController {
   var profileImageHasLoaded = false.obs;
   var isLoading = false.obs;
 
-
   Rx<TextEditingController> newPostController = TextEditingController().obs;
   var newPostMessageError = "".obs;
 
@@ -194,7 +193,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(1),
-                                child: Text( Tags.tagsList[0]))
+                                child: Text(Tags.tagsList[0]))
                           ],
                         ),
                         Row(
@@ -206,7 +205,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(2),
-                                child: Text( Tags.tagsList[1]))
+                                child: Text(Tags.tagsList[1]))
                           ],
                         ),
                         Row(
@@ -218,7 +217,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(3),
-                                child: Text( Tags.tagsList[2]))
+                                child: Text(Tags.tagsList[2]))
                           ],
                         ),
                         Row(
@@ -230,7 +229,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(4),
-                                child: Text( Tags.tagsList[3]))
+                                child: Text(Tags.tagsList[3]))
                           ],
                         ),
                         Row(
@@ -242,7 +241,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(5),
-                                child: Text( Tags.tagsList[4]))
+                                child: Text(Tags.tagsList[4]))
                           ],
                         ),
                         Row(
@@ -254,7 +253,7 @@ class HomeController extends GetxController {
                                 onChanged: changeRadioValue),
                             GestureDetector(
                                 onTap: () => changeRadioValue(6),
-                                child: Text( Tags.tagsList[5]))
+                                child: Text(Tags.tagsList[5]))
                           ],
                         ),
                         Expanded(
@@ -291,22 +290,22 @@ class HomeController extends GetxController {
         break;
 
       case 2:
-        userChose.value =  Tags.tagsList[1];
+        userChose.value = Tags.tagsList[1];
 
         break;
 
       case 3:
-        userChose.value =  Tags.tagsList[2];
+        userChose.value = Tags.tagsList[2];
         break;
 
       case 4:
-        userChose.value =  Tags.tagsList[3];
+        userChose.value = Tags.tagsList[3];
         break;
       case 5:
-        userChose.value =  Tags.tagsList[4];
+        userChose.value = Tags.tagsList[4];
         break;
       case 6:
-        userChose.value =  Tags.tagsList[5];
+        userChose.value = Tags.tagsList[5];
         break;
     }
   }

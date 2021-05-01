@@ -19,18 +19,39 @@ class HotPostsController extends GetxController {
       var response = await firebaseFirestore
           .collection('all_posts')
           .orderBy('uid', descending: true)
+          .limit(50)
           .get();
 
-      response.docs.forEach((element) {
-        _listPostModel.add(PostsModel.fromJson(element.data()));
-      });
-
-      _listPostModel.forEach((element) {});
+      List<String> uidList = [];
+      getUidOfLast50(response, uidList);
+      await filter(uidList, _listPostModel);
 
       listPostsModel = _listPostModel;
       return true;
     } catch (e) {
       return false;
     }
+  }
+
+  getUidOfLast50(QuerySnapshot response, List<String> uidList) {
+    response.docs.forEach((element) {
+      uidList.add(PostsModel.fromJson(element.data()).uid);
+    });
+  }
+
+  Future<void> filter(
+      List<String> uidList, List<PostsModel> _listPostModel) async {
+    uidList.forEach((element) async {
+      var _response = await firebaseFirestore
+          .collection('all_posts')
+          .doc(element)
+          .collection('coments')
+          .get();
+      if (_response.size > 5) {
+        var _filteredResponse =
+            await firebaseFirestore.collection('all_posts').doc(element).get();
+        _listPostModel.add(PostsModel.fromJson(_filteredResponse.data()));
+      }
+    });
   }
 }
