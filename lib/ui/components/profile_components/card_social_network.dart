@@ -50,7 +50,7 @@ class CardSocialNetwork extends StatelessWidget {
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: Colors.black38,
-                                                    blurRadius: 8)
+                                                    blurRadius: 11)
                                               ]),
                                           child: Image.network(
                                             snapshot.data['whatsapp'],
