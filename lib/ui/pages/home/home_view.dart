@@ -35,18 +35,7 @@ class HomeView extends StatelessWidget {
               style: TextStyle(fontFamily: 'Quantum'),
             )),
         actions: [
-          MiniUserAvatar(
-            controller: userController,
-            onTap: () async {
-              controller.isLoading.value = true;
-              await userController.getUserInformations();
-              controller.isLoading.value = false;
-              Get.toNamed(Routes.USERPROFILE, arguments: {
-                "userModel": userController.userModel,
-                "isOwnProfile": true
-              });
-            },
-          )
+          IconButton(icon: Icon(Icons.search), onPressed: (){})
         ],
       ),
       body: Obx(() => LoadingUtil(

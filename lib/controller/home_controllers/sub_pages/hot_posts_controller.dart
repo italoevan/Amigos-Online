@@ -1,21 +1,30 @@
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HotPostsController extends GetxController {
   var postsHasLoaded = false.obs;
-  List<PostsModel> listPostsModel;
+  var listPostsModel = RxList<PostsModel>();
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-
+  RefreshController refreshController = RefreshController();
+  var isLoading = false.obs;
   @override
   void onInit() async {
     postsHasLoaded.value = await getHotPosts();
     super.onInit();
   }
 
+  refresh() async {
+    postsHasLoaded.value = false;
+    postsHasLoaded.value = await getHotPosts();
+
+    return;
+  }
+
   Future<bool> getHotPosts() async {
+    isLoading.value = true;
     try {
-      List<PostsModel> _listPostModel = [];
       var response = await firebaseFirestore
           .collection('all_posts')
           .orderBy('uid', descending: true)
@@ -24,11 +33,12 @@ class HotPostsController extends GetxController {
 
       List<String> uidList = [];
       getUidOfLast50(response, uidList);
-      await filter(uidList, _listPostModel);
 
-      listPostsModel = _listPostModel;
+      listPostsModel = await filter(uidList);
+      isLoading.value = false;
       return true;
     } catch (e) {
+      isLoading.value = false;
       return false;
     }
   }
@@ -39,8 +49,9 @@ class HotPostsController extends GetxController {
     });
   }
 
-  Future<void> filter(
-      List<String> uidList, List<PostsModel> _listPostModel) async {
+  Future<RxList<PostsModel>> filter(List<String> uidList) async {
+    RxList<PostsModel> _list = RxList<PostsModel>();
+
     uidList.forEach((element) async {
       var _response = await firebaseFirestore
           .collection('all_posts')
@@ -50,8 +61,9 @@ class HotPostsController extends GetxController {
       if (_response.size > 5) {
         var _filteredResponse =
             await firebaseFirestore.collection('all_posts').doc(element).get();
-        _listPostModel.add(PostsModel.fromJson(_filteredResponse.data()));
+        _list.add(PostsModel.fromJson(_filteredResponse.data()));
       }
     });
+    return _list;
   }
 }
