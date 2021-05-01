@@ -12,6 +12,7 @@ class HomeController extends GetxController {
   var profileImageHasLoaded = false.obs;
   var isLoading = false.obs;
 
+
   Rx<TextEditingController> newPostController = TextEditingController().obs;
   var newPostMessageError = "".obs;
 

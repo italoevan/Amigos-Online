@@ -7,4 +7,12 @@ class GetAtualUserId {
     String response = auth.currentUser.uid;
     return response;
   }
+
+  bool isSameUser(String id) {
+    if(auth.currentUser.uid == id){
+      return true;
+    }
+    return false;
+
+  }
 }

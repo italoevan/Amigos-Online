@@ -1,4 +1,4 @@
-import 'package:amigos_online/ui/components/generic_components/user_avatar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:get/get.dart';

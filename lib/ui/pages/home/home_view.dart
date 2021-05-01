@@ -21,7 +21,9 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       drawer: HomeDrawer(
+        homeController: controller,
         controller: userController,
+      
       ),
       appBar: AppBar(
         title: Obx(() => Text(
