@@ -5,6 +5,7 @@ class GenericTextField extends StatefulWidget {
       {@required this.controller,
       this.error,
       this.hasHint,
+      this.onChanged,
       this.textHint,
       this.isPassword,
       this.maxLength});
@@ -14,6 +15,7 @@ class GenericTextField extends StatefulWidget {
   final bool isPassword;
   final int maxLength;
   bool passwordIsVisible = false;
+  final Function onChanged;
   final TextEditingController controller;
 
   @override
@@ -25,6 +27,7 @@ class _GenericTextFieldState extends State<GenericTextField> {
   Widget build(BuildContext context) {
     return TextField(
       maxLength: widget.maxLength,
+      onChanged: widget.onChanged,
       obscureText: widget.isPassword != null
           ? !widget.passwordIsVisible
               ? true
@@ -35,10 +38,9 @@ class _GenericTextFieldState extends State<GenericTextField> {
           suffixIcon: widget.isPassword == true
               ? GestureDetector(
                   child: Icon(
-                    widget.passwordIsVisible ?   
-                    Icons.remove_red_eye_outlined
-                    :
-                    Icons.remove_red_eye_sharp,
+                    widget.passwordIsVisible
+                        ? Icons.remove_red_eye_outlined
+                        : Icons.remove_red_eye_sharp,
                   ),
                   onTap: () {
                     setState(() {

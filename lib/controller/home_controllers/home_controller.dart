@@ -309,4 +309,23 @@ class HomeController extends GetxController {
         break;
     }
   }
+
+  String defineAtualPage() {
+    if (atualPage.value == 0) {
+      return 'EM ALTA';
+    }
+
+    if (atualPage.value == 1) {
+      return 'HOME';
+    }
+
+    if (atualPage.value == 2) {
+      return 'SEGUINDO';
+    }
+
+    if (atualPage.value == 3) {
+      return 'PESQUISAR';
+    }
+    return 'a';
+  }
 }
