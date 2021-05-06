@@ -19,20 +19,18 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBody: true,
       drawer: HomeDrawer(
         homeController: controller,
         controller: userController,
-      
       ),
       appBar: AppBar(
         title: Obx(() => Text(
               controller.defineAtualPage(),
               style: TextStyle(fontFamily: 'Quantum'),
             )),
-        actions: [
-         SearchItem(controller)
-        ],
+        actions: [SearchItem(controller)],
       ),
       body: Obx(() => LoadingUtil(
           widget: Container(
@@ -50,7 +48,7 @@ class HomeView extends StatelessWidget {
                       HotPosts(),
                       HomePostsArea(controller: controller),
                       Following(),
-                      Search()
+                      Search(controller)
                     ],
                   ),
                 )
@@ -58,7 +56,10 @@ class HomeView extends StatelessWidget {
             ),
           ),
           loading: controller.isLoading.value)),
-      floatingActionButton: CustomHomeFloatButton(controller: controller, userController: userController,),
+      floatingActionButton: CustomHomeFloatButton(
+        controller: controller,
+        userController: userController,
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomBottomNavigation(
         controller: controller,
