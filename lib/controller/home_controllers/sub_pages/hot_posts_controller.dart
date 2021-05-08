@@ -1,4 +1,5 @@
 import 'package:amigos_online/data/models/posts_model.dart';
+import 'package:amigos_online/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -65,5 +66,20 @@ class HotPostsController extends GetxController {
       }
     });
     return _list;
+  }
+
+  Future<UserModel> getOtherUserInformation(PostsModel model) async {
+    isLoading.value = true;
+    try {
+      var response =
+          await firebaseFirestore.collection('users').doc(model.user_id).get();
+
+      UserModel otherUserModel = UserModel.fromJson(response.data());
+      isLoading.value = false;
+      return otherUserModel;
+    } catch (e) {
+      isLoading.value = false;
+      return null;
+    }
   }
 }

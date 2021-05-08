@@ -31,13 +31,20 @@ class _SearchedPostsState extends State<SearchedPosts> {
   Widget build(BuildContext context) {
     return Obx(() => Expanded(
           child: widget.searchController.postsModel.length == 0
-              ? EmptyPage(message: 'Faça sua busca',)
+              ? EmptyPage(
+                  message: 'Faça sua busca',
+                )
               : widget.searchController.postsModel.length == 0
-                  ? EmptyPage(message: 'Faça sua busca',)
+                  ? EmptyPage(
+                      message: 'Faça sua busca',
+                    )
                   : ListView.builder(
+                    physics: BouncingScrollPhysics(),
                       itemCount: widget.searchController.postsModel.length,
                       itemBuilder: (context, index) {
                         return PostsItem(
+                            index: index,
+                            lenght: widget.searchController.postsModel.length,
                             model: widget.searchController.postsModel[index]);
                       }),
         ));

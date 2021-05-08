@@ -34,7 +34,7 @@ class CardSocialNetwork extends StatelessWidget {
                         return Container(
                           height: 150,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               socialNetworkModel.whatsapp != null
                                   ? GestureDetector(
