@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class EmptyPage extends StatelessWidget {
+  EmptyPage({String message}) : this.message = message;
+
+  final String message;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,7 +16,7 @@ class EmptyPage extends StatelessWidget {
             height: 15,
           ),
           Text(
-            "Você não segue nenhum post ainda",
+            message != null ? message : "Você não segue nenhum post ainda",
             textAlign: TextAlign.center,
           )
         ],
