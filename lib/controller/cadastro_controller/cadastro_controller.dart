@@ -31,7 +31,7 @@ class CadastroController extends GetxController {
   Future cadastrar() async {
     loading.value = true;
     print("${emailController.value.text} e ${senhaController.value.text}");
-
+  //cadastrado
     try {
       var response = await cadastroRepository.cadastrar(
           emailController.value.text, senhaController.value.text);
