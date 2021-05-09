@@ -34,7 +34,7 @@ class UserSettings extends StatelessWidget {
                   SettingsItem(
                     icon: Icon(Icons.camera_alt),
                     title: "Mudar foto",
-                    onTap: () {},
+                    onTap: () => userSettingsController.openCardWithProfileImage(),
                   ),
                   SettingsItem(
                     icon: Icon(

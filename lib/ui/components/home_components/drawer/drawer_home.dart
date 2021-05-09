@@ -2,7 +2,6 @@ import 'package:amigos_online/controller/home_controllers/home_controller.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/components/generic_components/user_avatar.dart';
-import 'package:amigos_online/ui/components/home_components/body/mini_user_avatar.dart';
 import 'package:amigos_online/ui/components/home_components/drawer/drawer_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,13 +50,29 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 onTap: () {},
               ),
-              DrawerItem(title: 'Seu Perfil',
-              icon: Icon(Icons.person, color: Colors.green,),
-              onTap: (){},
+              DrawerItem(
+                title: 'Seu Perfil',
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.green,
+                ),
+                onTap: () async {
+                  homeController.isLoading.value = true;
+                  Get.back();
+                  await controller.getUserInformations();
+                  homeController.isLoading.value = false;
+                  Get.toNamed(Routes.USERPROFILE, arguments: {
+                    "userModel": controller.userModel,
+                    "isOwnProfile": true
+                  });
+                },
               ),
               DrawerItem(
                 title: 'Sair',
-                icon: Icon(Icons.logout, color: Colors.red,),
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.red,
+                ),
                 onTap: () {
                   controller.auth.signOut();
                   Get.offAllNamed(Routes.LOGIN);
