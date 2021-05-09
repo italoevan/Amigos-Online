@@ -3,14 +3,15 @@ import 'package:amigos_online/data/models/social_network_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/ui/components/profile_components/card_social_network.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dart_notification_center/dart_notification_center.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UserProfileController extends GetxController {
-  final UserModel model =
-      Get.arguments["userModel"]; //Use-se aso seja o proprio perfil
+  Rx<UserModel> model = Rx<UserModel>();
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   TextEditingController changeNameController = TextEditingController();
@@ -28,10 +29,11 @@ class UserProfileController extends GetxController {
   RefreshController refreshController = RefreshController();
   @override
   void onInit() async {
+    model.value = Get.arguments["userModel"];
     hasNameLoaded.value = await getUserName();
     hasPostCountLoaded.value = await getPostsCount();
     hasPostsLoaded.value = await getUserPosts();
-
+   
     getUserName();
     super.onInit();
   }
@@ -39,7 +41,7 @@ class UserProfileController extends GetxController {
   Future<bool> getUserName() async {
     try {
       var response =
-          await firestore.collection('users').doc(model.user_id).get();
+          await firestore.collection('users').doc(model.value.user_id).get();
       UserModel userModel = UserModel.fromJson(response.data());
       userName.value = userModel.name;
       return true;
@@ -53,7 +55,7 @@ class UserProfileController extends GetxController {
   Future<bool> getPostsCount() async {
     try {
       var response =
-          await firestore.collection('users').doc(model.user_id).get();
+          await firestore.collection('users').doc(model.value.user_id).get();
       UserModel userModel = UserModel.fromJson(response.data());
       userPostsCount.value = userModel.n_posts;
       return true;
@@ -67,7 +69,7 @@ class UserProfileController extends GetxController {
     try {
       var response = await firestore
           .collection('users')
-          .doc(model.user_id)
+          .doc(model.value.user_id)
           .update({"name": value});
       getUserName();
       return response;
@@ -84,7 +86,7 @@ class UserProfileController extends GetxController {
     try {
       var response = await firestore
           .collection('users')
-          .doc(model.user_id)
+          .doc(model.value.user_id)
           .collection('posts')
           .orderBy('uid', descending: true)
           .get();
@@ -107,7 +109,7 @@ class UserProfileController extends GetxController {
     SocialNetworkModel _socialNetworkModel;
     var response = await firestore
         .collection('users')
-        .doc(model.user_id)
+        .doc(model.value.user_id)
         .collection('social_network')
         .doc('social_network')
         .get();
@@ -132,8 +134,10 @@ class UserProfileController extends GetxController {
     switch (socialNetork) {
       case 'whatsapp':
         var whatsappNumber = 'whatsapp://send?phone=$url';
-        await canLaunch(whatsappNumber) ?  launch(whatsappNumber): throw 'Não foi possivel abrir';
-      
+        await canLaunch(whatsappNumber)
+            ? launch(whatsappNumber)
+            : throw 'Não foi possivel abrir';
+
         break;
 
       case 'instagram':

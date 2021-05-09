@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:amigos_online/data/models/social_network_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/ui/components/generic_components/generic_button.dart';
@@ -6,6 +8,7 @@ import 'package:amigos_online/utils/firebase_utils/get_atual_user_id.dart';
 import 'package:amigos_online/utils/generic_utils/loading_util.dart';
 import 'package:amigos_online/utils/generic_utils/social_network_image_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dart_notification_center/dart_notification_center.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +21,8 @@ class UserSettingsController extends GetxController {
   final FirebaseFirestore firestore;
   var isLoading = false.obs;
   var isUserCHoice = false.obs;
+
+  var changePhotoIsLoading = false.obs;
 
   final picker = ImagePicker();
   Rx<File> _image = Rx<File>();
@@ -237,7 +242,10 @@ class UserSettingsController extends GetxController {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ChangePhotoItem(
-                          onTap: () {},
+                          onTap: () {
+                            _image.value = null;
+                            Get.back();
+                          },
                           buttonColor: Colors.red,
                           iconData: Icons.remove_circle,
                         ),
@@ -253,6 +261,13 @@ class UserSettingsController extends GetxController {
                 ),
               ),
             ),
+            Obx(
+              () => Visibility(
+                  visible: changePhotoIsLoading.value,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  )),
+            )
           ],
         ),
       ),
@@ -272,12 +287,15 @@ class UserSettingsController extends GetxController {
   bool get isNewPhoto => _image.value != null;
 
   savePhotoOnStorage() async {
+    changePhotoIsLoading.value = true;
     FirebaseStorage storage = FirebaseStorage.instance;
+
+    var uid = Timestamp.now().toString();
 
     var reference = await storage
         .ref()
         .child('/profile_images')
-        .child(GetAtualUserId().getUserId())
+        .child(GetAtualUserId().getUserId() + uid)
         .putFile(_image.value);
     var link = await reference.ref.getDownloadURL();
     Map<String, dynamic> map = {"user_image": link};
@@ -287,6 +305,12 @@ class UserSettingsController extends GetxController {
         .doc(GetAtualUserId().getUserId())
         .update(map);
     print(link);
+    changePhotoIsLoading.value = false;
+    DartNotificationCenter.post(channel: 'profileIMage', options: link);
+
+    Get.back();
+
+    Get.snackbar('Parabéns', 'Sucesso ao trocar!!');
     return link;
   }
 }

@@ -4,10 +4,11 @@ import 'package:amigos_online/controller/user_profile_controllers/user_profile_c
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/components/generic_components/user_avatar.dart';
+import 'package:dart_notification_center/dart_notification_center.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileHeader extends StatelessWidget {
+class ProfileHeader extends StatefulWidget {
   ProfileHeader(
       {@required this.model,
       @required this.controller,
@@ -15,7 +16,26 @@ class ProfileHeader extends StatelessWidget {
   final UserProfileController controller;
   final UserModel model;
   final bool isOwnProfile;
+
+  @override
+  _ProfileHeaderState createState() => _ProfileHeaderState();
+}
+
+class _ProfileHeaderState extends State<ProfileHeader> {
   final animateContainer = false.obs;
+
+  @override
+  void initState() {
+    DartNotificationCenter.subscribe(
+        channel: 'profileIMage',
+        observer: this,
+        onNotification: (v) async {
+          setState(()  {
+            widget.model.user_image = v;
+          });
+        });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +61,7 @@ class ProfileHeader extends StatelessWidget {
                         width: Get.width * 0.8,
                         height: Get.height * 0.5,
                         child: Image.network(
-                          model.user_image,
+                          widget.model.user_image,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -51,20 +71,20 @@ class ProfileHeader extends StatelessWidget {
                     borderColor: Colors.green,
                     hasBorder: true,
                     isNetworkImage: true,
-                    networkImage: model.user_image,
+                    networkImage: widget.model.user_image,
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Obx(() => controller.hasNameLoaded.value
-                        ? Text(controller.userName.value,
+                    Obx(() => widget.controller.hasNameLoaded.value
+                        ? Text(widget.controller.userName.value,
                             style: TextStyle(color: Colors.black, fontSize: 25))
                         : Text("Usuario")),
-                    isOwnProfile
+                    widget.isOwnProfile
                         ? IconButton(
                             icon: Icon(Icons.settings),
-                            onPressed: (){
+                            onPressed: () {
                               Get.toNamed(Routes.USER_SETTINGS);
                             },
                             color: Colors.red,
@@ -97,9 +117,10 @@ class ProfileHeader extends StatelessWidget {
                                     "Posts:",
                                     style: TextStyle(color: Colors.black),
                                   ),
-                                  Obx(() => controller.hasPostCountLoaded.value
+                                  Obx(() => widget
+                                          .controller.hasPostCountLoaded.value
                                       ? Text(
-                                          controller.userPostsCount.value
+                                          widget.controller.userPostsCount.value
                                               .toString(),
                                           style: TextStyle(color: Colors.black))
                                       : Text(""))
@@ -116,12 +137,12 @@ class ProfileHeader extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: InkWell(
                                   highlightColor: Colors.red,
-                                  onTap: () async{
+                                  onTap: () async {
                                     animateContainer.value = true;
                                     Timer(Duration(milliseconds: 100),
                                         () => animateContainer.value = false);
-                                    controller
-                                        .openCardSocialNetwork(controller);
+                                    widget.controller.openCardSocialNetwork(
+                                        widget.controller);
                                   },
                                   child: AnimatedContainer(
                                     duration: Duration(milliseconds: 300),
