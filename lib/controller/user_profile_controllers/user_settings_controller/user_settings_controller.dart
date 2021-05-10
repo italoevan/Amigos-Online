@@ -143,6 +143,7 @@ class UserSettingsController extends GetxController {
                                             : _instagram.value.text)
                                     .then((value) {
                                   if (value) {
+                                    Get.back();
                                     Get.snackbar('Opa!!',
                                         'Você atualizou suas informações');
                                   }
