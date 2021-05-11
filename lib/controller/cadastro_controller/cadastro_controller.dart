@@ -66,10 +66,10 @@ class CadastroController extends GetxController {
             return true;
           } else {
             errorsList[2] = 'O apelido tem que ter mais do que 4 caracteres';
-            Get.snackbar('Error', 'Apelido inválido');
+            Get.snackbar('Ops!', 'Apelido inválido');
           }
         } else {
-          Get.snackbar('Error', 'Senha inválida');
+          Get.snackbar('Ops!', 'Senha inválida');
           errorsList[1] = "A senha não pode ter menos do que 5 digitos";
           return false;
         }
@@ -77,11 +77,11 @@ class CadastroController extends GetxController {
         return false;
       } else {
         errorsList[0] = "Insira um email valido";
-        Get.snackbar('Error', 'Insira um email válido');
+        Get.snackbar('Ops!', 'Insira um email válido');
         return false;
       }
     } else {
-      Get.snackbar('Error', 'Insira uma imagem');
+      Get.snackbar('Ops!', 'Insira uma imagem');
       return false;
     }
   }

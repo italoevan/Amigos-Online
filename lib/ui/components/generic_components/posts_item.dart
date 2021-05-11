@@ -37,10 +37,23 @@ class PostsItem extends StatelessWidget {
                           onTap: onNameTap,
                           child: Row(
                             children: [
-                              UserAvatar(
-                                isNetworkImage: true,
-                                isMiniAvatar: true,
-                                networkImage: model.user_image,
+                              FutureBuilder(
+                                  future: controller.getImageFromUser(model),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return UserAvatar(
+                                        isNetworkImage: true,
+                                        isMiniAvatar: true,
+                                        networkImage: snapshot.data,
+                                      );
+                                    } else {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }),
+                              SizedBox(
+                                width: 3,
                               ),
                               Text(model.user_name),
                             ],
