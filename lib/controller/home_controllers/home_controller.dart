@@ -63,7 +63,6 @@ class HomeController extends GetxController {
 
       PostsModel postsModel = PostsModel();
       postsModel.user_id = userModel.user_id;
-      postsModel.user_image = userModel.user_image;
       postsModel.tag = userChose.value;
       postsModel.content = newPostController.value.text;
       postsModel.user_name = userModel.name;

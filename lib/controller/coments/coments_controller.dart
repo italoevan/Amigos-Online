@@ -40,6 +40,18 @@ class ComentsController extends GetxController {
     super.onInit();
   }
 
+  Future<String> getOtherUsersImage(ComentsPostsModel model) async {
+    var response = await firestore.collection('users').doc(model.user_id).get();
+    String value = response.data()['user_image'];
+    return value;
+  }
+
+  Future<String> getMainUserImage() async {
+    var response = await firestore.collection('users').doc(model.user_id).get();
+    String value = response.data()['user_image'];
+    return value;
+  }
+
   Future<bool> getOthersUsersComments() async {
     try {
       var response = await firestore
@@ -70,7 +82,7 @@ class ComentsController extends GetxController {
           Timer(
               Duration(milliseconds: 400),
               () => scrollController
-                  .jumpTo(scrollController.position.maxScrollExtent + 50));
+                  .jumpTo(scrollController.position.maxScrollExtent + 90));
         }
       }
     });

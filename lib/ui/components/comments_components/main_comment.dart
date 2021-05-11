@@ -60,10 +60,20 @@ class MainComent extends StatelessWidget {
                               });
                             },
                             child: Row(children: [
-                              MiniUserAvatar(
-                                hasNetworkImage: true,
-                                networkImage: model.user_image,
-                              ),
+                              FutureBuilder(
+                                  future: controller.getMainUserImage(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return MiniUserAvatar(
+                                        hasNetworkImage: true,
+                                        networkImage: snapshot.data,
+                                      );
+                                    } else {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }),
                               SizedBox(
                                 width: 8,
                               ),

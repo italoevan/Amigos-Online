@@ -330,12 +330,12 @@ class UserSettingsController extends GetxController {
     changePhotoIsLoading.value = true;
     FirebaseStorage storage = FirebaseStorage.instance;
 
-    var uid = Timestamp.now().toString();
+
 
     var reference = await storage
         .ref()
         .child('/profile_images')
-        .child(GetAtualUserId().getUserId() + uid)
+        .child(GetAtualUserId().getUserId())
         .putFile(_image.value);
     var link = await reference.ref.getDownloadURL();
     Map<String, dynamic> map = {"user_image": link};

@@ -5,7 +5,7 @@ class PostsModel {
   String content;
   String user_name;
   String user_id;
-  String user_image;
+
   String date;
   String uid;
 
@@ -16,7 +16,6 @@ class PostsModel {
     content = map['content'];
     user_name = map['user_name'];
     user_id = map['user_id'];
-    user_image = map['user_image'];
     date = map['date'];
     uid = map['uid'];
   }
@@ -27,11 +26,8 @@ class PostsModel {
     map['content'] = content;
     map['user_name'] = user_name;
     map['user_id'] = user_id;
-    map['user_image'] = user_image;
     map['date'] = date;
     map['uid'] = uid;
     return map;
   }
-
-  
 }

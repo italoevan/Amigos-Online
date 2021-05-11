@@ -28,7 +28,6 @@ class ComentsItem extends StatelessWidget {
                   height: 0,
                 )
               : Divider(),
-          
           Row(
             children: [
               GestureDetector(
@@ -36,10 +35,21 @@ class ComentsItem extends StatelessWidget {
                     .getUserInformationToOpenProfile(model), //Open profile
                 child: Row(
                   children: [
-                    MiniUserAvatar(
-                      networkImage: model.user_image,
-                      hasNetworkImage: true,
-                    ),
+                    FutureBuilder(
+                        future: controller.getOtherUsersImage(model),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return MiniUserAvatar(
+                              networkImage: snapshot.data,
+                              hasNetworkImage: true,
+                            );
+                          } else {
+                            return SizedBox(
+                                height: 45,
+                                child:
+                                    Center(child: CircularProgressIndicator()));
+                          }
+                        }),
                     VerticalDivider(),
                     Text(model.user_name)
                   ],
