@@ -35,6 +35,8 @@ class UserSettingsController extends GetxController {
   }
 
   showSocialNetworkDialog(BuildContext context) async {
+    var form = GlobalKey<FormState>();
+
     isLoading.value = true;
     SocialNetworkModel socialNetworkModel;
     String userId = GetAtualUserId().getUserId();
@@ -47,9 +49,20 @@ class UserSettingsController extends GetxController {
 
     if (response.data() != null) {
       socialNetworkModel = SocialNetworkModel.fromJson(response.data());
+      int value = int.parse(socialNetworkModel.whatsapp.toString().replaceFirst(
+            new RegExp('55'),
+            '',
+          ));
+      socialNetworkModel.whatsapp = value;
     } else {
       socialNetworkModel = SocialNetworkModel();
     }
+
+    TextEditingController _ddi = TextEditingController(
+      text: '+55',
+    );
+
+    TextEditingController _arroba = TextEditingController(text: '   @');
 
     TextEditingController _whatsapp = TextEditingController(
         text: socialNetworkModel.whatsapp != null
@@ -93,10 +106,20 @@ class UserSettingsController extends GetxController {
                                 width: 55,
                               ),
                             ),
-                            Expanded(
+                            Flexible(
+                                flex: 1,
                                 child: TextField(
-                              controller: _whatsapp,
-                            ))
+                                    style: TextStyle(color: Colors.black38),
+                                    controller: _ddi,
+                                    enabled: false)),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Flexible(
+                                flex: 6,
+                                child: TextField(
+                                  controller: _whatsapp,
+                                ))
                           ],
                         ),
                         Row(
@@ -107,10 +130,18 @@ class UserSettingsController extends GetxController {
                               height: 70,
                               width: 70,
                             ),
-                            Expanded(
+                            Flexible(
+                              flex: 1,
+                              child: TextField(
+                                  style: TextStyle(color: Colors.black38),
+                                  controller: _arroba,
+                                  enabled: false),
+                            ),
+                            Flexible(
+                                flex: 6,
                                 child: TextField(
-                              controller: _twitter,
-                            ))
+                                  controller: _twitter,
+                                ))
                           ],
                         ),
                         Row(
@@ -120,10 +151,18 @@ class UserSettingsController extends GetxController {
                               height: 70,
                               width: 70,
                             ),
-                            Expanded(
+                            Flexible(
+                              child: TextField(
+                                style: TextStyle(color: Colors.black38),
+                                controller: _arroba,
+                                enabled: false,
+                              ),
+                            ),
+                            Flexible(
+                                flex: 6,
                                 child: TextField(
-                              controller: _instagram,
-                            ))
+                                  controller: _instagram,
+                                ))
                           ],
                         ),
                         SizedBox(
@@ -168,7 +207,7 @@ class UserSettingsController extends GetxController {
     SocialNetworkModel _socialNetworkModel = SocialNetworkModel();
 
     if (whatsapp != null) {
-      _socialNetworkModel.whatsapp = int.parse(whatsapp);
+      _socialNetworkModel.whatsapp = int.parse('55$whatsapp');
     }
     if (twitter != null) {
       _socialNetworkModel.twitter = twitter;
