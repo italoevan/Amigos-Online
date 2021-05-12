@@ -11,6 +11,7 @@ class PostsModel {
 
   PostsModel();
 
+  //to get
   PostsModel.fromJson(Map<String, dynamic> map) {
     tag = map['tag'];
     content = map['content'];
@@ -20,6 +21,7 @@ class PostsModel {
     uid = map['uid'];
   }
 
+  //to send to database
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = Map();
     map['tag'] = tag;

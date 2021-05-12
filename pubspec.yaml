@@ -1,4 +1,4 @@
-name: amigos_online
+name: Amigos Online
 description: A new Flutter application.
 
 
@@ -31,6 +31,7 @@ dependencies:
   regexpattern: ^1.0.0
   pull_to_refresh: ^1.6.5
   dart_notification_center: ^1.0.0+1
+  onesignal_flutter: ^2.0.0
   
   #admob_flutter: ^1.0.1
 
