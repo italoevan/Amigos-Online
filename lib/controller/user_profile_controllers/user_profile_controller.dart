@@ -33,9 +33,19 @@ class UserProfileController extends GetxController {
     hasNameLoaded.value = await getUserName();
     hasPostCountLoaded.value = await getPostsCount();
     hasPostsLoaded.value = await getUserPosts();
-   
+    DartNotificationCenter.subscribe(
+        channel: 'profilePosts',
+        observer: this,
+        onNotification: (v) async => onRefresh());
     getUserName();
     super.onInit();
+  }
+
+  onRefresh() async {
+    hasPostsLoaded.value = false;
+    hasPostsLoaded.value = await getUserPosts();
+    refreshController.refreshCompleted();
+    return;
   }
 
   Future<bool> getUserName() async {

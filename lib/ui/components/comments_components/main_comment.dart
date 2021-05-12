@@ -49,10 +49,12 @@ class MainComent extends StatelessWidget {
                       Row(
                         children: [
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               UserModel userModel = UserModel();
                               var map = model.toJson();
                               userModel = UserModel.fromJson(map);
+                              userModel.user_image =
+                                   controller.mainImage;
 
                               Get.toNamed(Routes.USERPROFILE, arguments: {
                                 "isOwnProfile": false,

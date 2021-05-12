@@ -30,7 +30,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
         channel: 'profileIMage',
         observer: this,
         onNotification: (v) async {
-          setState(()  {
+          setState(() {
             widget.model.user_image = v;
           });
         });

@@ -25,6 +25,7 @@ class ComentsController extends GetxController {
       Get.find<UserProviderController>();
 
   UserModel userModel;
+  String mainImage;
   var isLoading = false.obs;
   HomeController homeController;
   var otherComentshasLoaded = false.obs;
@@ -34,6 +35,7 @@ class ComentsController extends GetxController {
   @override
   void onInit() async {
     model = Get.arguments["posts_model"];
+    mainImage = await getMainUserImage();
     otherComentshasLoaded.value = await getOthersUsersComments();
     userModel = userProviderController.userModel;
 
@@ -49,6 +51,7 @@ class ComentsController extends GetxController {
   Future<String> getMainUserImage() async {
     var response = await firestore.collection('users').doc(model.user_id).get();
     String value = response.data()['user_image'];
+    mainImage = value;
     return value;
   }
 

@@ -330,8 +330,6 @@ class UserSettingsController extends GetxController {
     changePhotoIsLoading.value = true;
     FirebaseStorage storage = FirebaseStorage.instance;
 
-
-
     var reference = await storage
         .ref()
         .child('/profile_images')
@@ -347,6 +345,7 @@ class UserSettingsController extends GetxController {
     print(link);
     changePhotoIsLoading.value = false;
     DartNotificationCenter.post(channel: 'profileIMage', options: link);
+    DartNotificationCenter.post(channel: 'profilePosts', options: link);
 
     Get.back();
 

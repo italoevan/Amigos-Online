@@ -4,5 +4,6 @@ class RegisterChannel {
   static dartNotificationRegister() {
     DartNotificationCenter.registerChannel(channel: 'examples');
     DartNotificationCenter.registerChannel(channel: 'profileIMage');
+    DartNotificationCenter.registerChannel(channel: 'profilePosts');
   }
 }

@@ -31,13 +31,7 @@ class PostsArea extends StatelessWidget {
                   )
                 : SmartRefresher(
                     controller: controller.refreshController,
-                    onRefresh: () async {
-                      controller.hasPostsLoaded.value = false;
-                      controller.hasPostsLoaded.value =
-                          await controller.getUserPosts();
-                      controller.refreshController.refreshCompleted();
-                      return;
-                    },
+                    onRefresh: () async => controller.onRefresh(),
                     child: ListView.builder(
                         itemCount: controller.listPosts.length,
                         itemBuilder: (context, index) {
