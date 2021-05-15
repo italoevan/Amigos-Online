@@ -16,6 +16,7 @@ class CadastroView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+  
         appBar: KeyBoardIsOpen.check(context)
             ? null
             : AppBar(
@@ -55,9 +56,7 @@ class CadastroView extends StatelessWidget {
                               top: 16, bottom: 8, left: 16, right: 16)
                           : EdgeInsets.only(
                               top: 16, bottom: 50, left: 16, right: 16),
-                      height: KeyBoardIsOpen.check(context)
-                          ? null
-                          : Get.height * 0.65,
+                    
                       width: Get.width,
                       decoration: BoxDecoration(
                           boxShadow: [

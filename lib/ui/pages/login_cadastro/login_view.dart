@@ -1,6 +1,7 @@
 import 'package:amigos_online/controller/login_controller/login_controller.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/components/generic_components/generic_button.dart';
+import 'package:amigos_online/ui/components/generic_components/logo.dart';
 import 'package:amigos_online/ui/components/generic_components/text_field_generic.dart';
 import 'package:amigos_online/utils/generic_utils/keyboard_is_open.dart';
 import 'package:amigos_online/utils/generic_utils/loading_util.dart';
@@ -23,10 +24,7 @@ class LoginView extends StatelessWidget {
               Expanded(
                   child: SafeArea(
                       child: Center(
-                          child: Text(
-                "AMIGOS\n  ONLINE",
-                style: TextStyle(fontFamily: "Quantum", fontSize: 40),
-              )))),
+                          child: Logo()))),
               Container(
                 height:
                     KeyBoardIsOpen.check(context) ? null : Get.height * 0.65,

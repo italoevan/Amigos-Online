@@ -26,7 +26,7 @@ dependencies:
   url_launcher: ^5.7.10
   image_picker: ^0.6.7+21
   firebase_storage: ^5.0.0
-  flutter_launcher_icons: ^0.8.1
+  #flutter_launcher_icons: "^0.8.0"
   flutter_spinkit: ^4.1.2+1
   regexpattern: ^1.0.0
   pull_to_refresh: ^1.6.5
@@ -38,6 +38,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.8.0"
+
+flutter_icons:
+  android: true
+  image_path: "assets/images/icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
