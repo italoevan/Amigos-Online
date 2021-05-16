@@ -110,7 +110,8 @@ class PostsItem extends StatelessWidget {
                         )),
                         Expanded(
                             child: FlatButton(
-                                onPressed: () {}, child: Text("Denunciar"))),
+                                onPressed: () => controller.report(model),
+                                child: Text("Denunciar"))),
                       ],
                     )
                   ],
