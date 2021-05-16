@@ -13,9 +13,7 @@ class ReportModel {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = Map();
-    map = {
-      "postsModel": postsModel.toJson(),
-      "description": description};
+    map = {"postsModel": postsModel.toJson(), "description": description};
     return map;
   }
 }

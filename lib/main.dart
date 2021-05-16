@@ -6,6 +6,7 @@ import 'package:dart_notification_center/dart_notification_center.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -14,15 +15,16 @@ void main() async {
   await Firebase.initializeApp();
   RegisterChannel.dartNotificationRegister();
 
-  //Remove this method to stop OneSignal Debugging 
+  //Remove this method to stop OneSignal Debugging
 
-
-OneSignal.shared.init(
-  "01c28a89-7e60-43e2-9cbd-602ccc49f561",
-
-);
-OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
-
+  OneSignal.shared.init(
+    "01c28a89-7e60-43e2-9cbd-602ccc49f561",
+  );
+  OneSignal.shared
+      .setInFocusDisplayType(OSNotificationDisplayType.notification);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(GetMaterialApp(
     initialRoute: Routes.INITIAL,
     getPages: AppPages.pages,
