@@ -1,7 +1,9 @@
+import 'package:amigos_online/data/models/initial_dialog_moddel.dart';
 import 'package:amigos_online/data/models/posts_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/ui/components/generic_components/tags/tags.dart';
+import 'package:amigos_online/ui/components/home_components/initial_dialog/initial_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +43,7 @@ class HomeController extends GetxController {
     getUserInformation();
     hasPostsLoaded.value = await getHomePosts();
     pageController.addListener(getAtualPage);
+    getInitialDialog();
     super.onInit();
   }
 
@@ -341,5 +344,20 @@ class HomeController extends GetxController {
       return 'PESQUISAR';
     }
     return 'a';
+  }
+
+  getInitialDialog() async {
+    var response = await firebaseFirestore
+        .collection('remote_configurations')
+        .doc('remote_configurations')
+        .get();
+
+    InitialDialogModel _model = InitialDialogModel.fromJson(response.data());
+
+    if (_model.dialogModel.hasInitialDialog) {
+      Get.dialog(InitialDialogView(_model));
+    } else {
+      DoNothingAction();
+    }
   }
 }
