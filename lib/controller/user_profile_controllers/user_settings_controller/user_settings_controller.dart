@@ -49,11 +49,15 @@ class UserSettingsController extends GetxController {
 
     if (response.data() != null) {
       socialNetworkModel = SocialNetworkModel.fromJson(response.data());
-      int value = int.parse(socialNetworkModel.whatsapp.toString().replaceFirst(
-            new RegExp('55'),
-            '',
-          ));
-      socialNetworkModel.whatsapp = value;
+
+      if (response.data()['whatsapp'] != null && response.data()['whatsapp']) {
+        int value =
+            int.parse(socialNetworkModel.whatsapp.toString().replaceFirst(
+                  new RegExp('55'),
+                  '',
+                ));
+        socialNetworkModel.whatsapp = value;
+      }
     } else {
       socialNetworkModel = SocialNetworkModel();
     }
