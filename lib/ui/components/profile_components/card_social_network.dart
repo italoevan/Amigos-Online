@@ -3,10 +3,17 @@ import 'package:amigos_online/utils/generic_utils/social_network_image_provider.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CardSocialNetwork extends StatelessWidget {
+class CardSocialNetwork extends StatefulWidget {
   CardSocialNetwork(this.socialNetworkModel, this.profileController);
   final UserProfileController profileController;
   final dynamic socialNetworkModel;
+
+  @override
+  _CardSocialNetworkState createState() => _CardSocialNetworkState();
+}
+
+class _CardSocialNetworkState extends State<CardSocialNetwork> {
+  double containerHeight = 150;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +21,9 @@ class CardSocialNetwork extends StatelessWidget {
       backgroundColor: Colors.transparent,
       contentPadding: EdgeInsets.all(0),
       content: Container(
-        height: socialNetworkModel == null ? null : 152,
+        height: widget.socialNetworkModel == null ? null : 152,
         decoration: BoxDecoration(
-            color: socialNetworkModel == null
+            color: widget.socialNetworkModel == null
                 ? Colors.transparent
                 : Colors.white.withOpacity(0.4),
             borderRadius: BorderRadius.circular(16),
@@ -24,7 +31,7 @@ class CardSocialNetwork extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            socialNetworkModel == null
+            widget.socialNetworkModel == null
                 ? Text("Usuário sem redes sociais")
                 : FutureBuilder(
                     future: SocialNetworkProvider.getImages(),
@@ -32,46 +39,55 @@ class CardSocialNetwork extends StatelessWidget {
                         (_, AsyncSnapshot<Map<dynamic, dynamic>> snapshot) {
                       if (snapshot.hasData) {
                         return Container(
-                          height: 150,
+                          height: containerHeight,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              socialNetworkModel.whatsapp != null
+                              !verifyAllIsNull([
+                                widget.socialNetworkModel.whatsapp,
+                                widget.socialNetworkModel.twitter,
+                                widget.socialNetworkModel.instagram
+                              ])
+                                  ? widget.socialNetworkModel.whatsapp != null
+                                      ? GestureDetector(
+                                          onTap: () => widget.profileController
+                                              .openUrlSocialNetwork(
+                                                  socialNetork: 'whatsapp',
+                                                  url: widget.socialNetworkModel
+                                                      .whatsapp
+                                                      .toString()),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        color: Colors.black38,
+                                                        blurRadius: 11)
+                                                  ]),
+                                              child: Image.network(
+                                                snapshot.data['whatsapp'],
+                                                height: 75,
+                                                width: 75,
+                                              )),
+                                        )
+                                      : SizedBox(
+                                          height: 0,
+                                          width: 0,
+                                        )
+                                  : Text("Usuário sem redes sociais"),
+                              widget.socialNetworkModel.twitter != null &&
+                                      widget.socialNetworkModel.twitter != ""
                                   ? GestureDetector(
-                                      onTap: () => profileController
-                                          .openUrlSocialNetwork(
-                                              socialNetork: 'whatsapp',
-                                              url: socialNetworkModel.whatsapp
-                                                  .toString()),
-                                      child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: Colors.black38,
-                                                    blurRadius: 11)
-                                              ]),
-                                          child: Image.network(
-                                            snapshot.data['whatsapp'],
-                                            height: 75,
-                                            width: 75,
-                                          )),
-                                    )
-                                  : SizedBox(
-                                      height: 0,
-                                      width: 0,
-                                    ),
-                              socialNetworkModel.twitter != null
-                                  ? GestureDetector(
-                                      onTap: () => profileController
+                                      onTap: () => widget.profileController
                                           .openUrlSocialNetwork(
                                               socialNetork: 'twitter',
                                               url: GetUtils.isURL(
-                                                      socialNetworkModel
+                                                      widget.socialNetworkModel
                                                           .twitter)
-                                                  ? socialNetworkModel.twitter
-                                                  : 'http://twitter.com/${socialNetworkModel.twitter}'),
+                                                  ? widget.socialNetworkModel.twitter
+                                                  : 'http://twitter.com/${widget.socialNetworkModel.twitter}'),
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius:
@@ -92,16 +108,17 @@ class CardSocialNetwork extends StatelessWidget {
                                       height: 0,
                                       width: 0,
                                     ),
-                              socialNetworkModel.instagram != null
+                              widget.socialNetworkModel.instagram != null &&
+                                      widget.socialNetworkModel.instagram != ""
                                   ? GestureDetector(
-                                      onTap: () => profileController
+                                      onTap: () => widget.profileController
                                           .openUrlSocialNetwork(
                                               socialNetork: 'instagram',
                                               url: GetUtils.isURL(
-                                                      socialNetworkModel
+                                                      widget.socialNetworkModel
                                                           .instagram)
-                                                  ? socialNetworkModel.instagram
-                                                  : 'http://instagram.com/${socialNetworkModel.instagram}'),
+                                                  ? widget.socialNetworkModel.instagram
+                                                  : 'http://instagram.com/${widget.socialNetworkModel.instagram}'),
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius:
@@ -134,5 +151,22 @@ class CardSocialNetwork extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool verifyAllIsNull(List<dynamic> list) {
+    int count = 0;
+    list.forEach((element) {
+      if (element == null ) {
+        DoNothingAction();
+      } else {
+        count++;
+      }
+    });
+
+    if (count != 0) {
+      return false;
+    }
+    
+    return true;
   }
 }

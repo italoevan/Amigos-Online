@@ -255,6 +255,18 @@ class HomeController extends GetxController {
                                 child: Text(Tags.tagsList[5]))
                           ],
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Radio(
+                                value: 7,
+                                groupValue: atualTagChoose.value,
+                                onChanged: changeRadioValue),
+                            GestureDetector(
+                                onTap: () => changeRadioValue(7),
+                                child: Text(Tags.tagsList[6]))
+                          ],
+                        ),
                         Expanded(
                           child: Align(
                             alignment: Alignment.bottomCenter,
@@ -305,6 +317,9 @@ class HomeController extends GetxController {
         break;
       case 6:
         userChose.value = Tags.tagsList[5];
+        break;
+      case 7:
+        userChose.value = Tags.tagsList[6];
         break;
     }
   }

@@ -50,7 +50,7 @@ class UserSettingsController extends GetxController {
     if (response.data() != null) {
       socialNetworkModel = SocialNetworkModel.fromJson(response.data());
 
-      if (response.data()['whatsapp'] != null && response.data()['whatsapp']) {
+      if (response.data()['whatsapp'] != null && response.data()['whatsapp'].toString() != "") {
         int value =
             int.parse(socialNetworkModel.whatsapp.toString().replaceFirst(
                   new RegExp('55'),

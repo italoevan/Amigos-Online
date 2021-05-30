@@ -5,6 +5,7 @@ class Tags {
     "Cotidiano",
     "Desabafo",
     "Política",
-    "Séries"
+    "Séries",
+    "Futebol"
   ];
 }
