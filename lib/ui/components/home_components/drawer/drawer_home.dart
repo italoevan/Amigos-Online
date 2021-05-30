@@ -5,6 +5,7 @@ import 'package:amigos_online/ui/components/generic_components/user_avatar.dart'
 import 'package:amigos_online/ui/components/home_components/drawer/drawer_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeDrawer extends StatelessWidget {
   HomeDrawer({@required this.controller, @required this.homeController});
@@ -48,7 +49,13 @@ class HomeDrawer extends StatelessWidget {
                   Icons.star,
                   color: Colors.orangeAccent,
                 ),
-                onTap: () {},
+                onTap: () async {
+                  String _url =
+                      'https://play.google.com/store/apps/details?id=com.evinc.amigos_online';
+                  if (await canLaunch(_url)) {
+                    launch(_url);
+                  }
+                },
               ),
               DrawerItem(
                 title: 'Seu Perfil',
