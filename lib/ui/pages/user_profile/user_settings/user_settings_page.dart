@@ -42,7 +42,7 @@ class UserSettings extends StatelessWidget {
                       color: Colors.red,
                     ),
                     title: "Mudar cor do perfil",
-                    onTap: () => Get.snackbar('Calma!','Função disponivel na próxima versão do app :)'),
+                    onTap: () => userSettingsController.openProfileAlert(),
                   )
                 ],
               )),

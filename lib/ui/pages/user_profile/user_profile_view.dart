@@ -1,6 +1,7 @@
 import 'package:amigos_online/controller/user_profile_controllers/user_profile_controller.dart';
 import 'package:amigos_online/ui/components/profile_components/posts_area.dart';
 import 'package:amigos_online/ui/components/profile_components/profile_header.dart';
+import 'package:amigos_online/utils/generic_utils/hex_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +34,14 @@ class UserProfileView extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                                color: Colors.lightGreen,
+                                color: userController.model.value
+                                                .customizedProfile !=
+                                            null &&
+                                        userController.model.value
+                                                .customizedProfile ==
+                                            true
+                                    ? HexConverter.toColor(userController.model.value.hexColor)
+                                    : Colors.lightGreen,
                                 borderRadius: BorderRadius.only(
                                     bottomRight: Radius.circular(32),
                                     bottomLeft: Radius.circular(32))),
@@ -68,7 +76,14 @@ class UserProfileView extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                                color: Colors.lightGreen,
+                                color: userController.model.value
+                                                .customizedProfile !=
+                                            null &&
+                                        userController.model.value
+                                                .customizedProfile ==
+                                            true
+                                    ? HexConverter.toColor(userController.model.value.hexColor)
+                                    : Colors.lightGreen,
                                 borderRadius: BorderRadius.only(
                                     bottomRight: Radius.circular(32),
                                     bottomLeft: Radius.circular(32))),

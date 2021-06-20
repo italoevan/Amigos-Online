@@ -1,11 +1,11 @@
 import 'dart:math';
 
+import 'package:amigos_online/controller/user_profile_controllers/user_settings_controller/color_choose/color_grid.dart';
 import 'package:amigos_online/data/models/social_network_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/ui/components/generic_components/generic_button.dart';
 import 'package:amigos_online/ui/components/profile_components/profile_settings_components/change_photo_component.dart';
 import 'package:amigos_online/utils/firebase_utils/get_atual_user_id.dart';
-import 'package:amigos_online/utils/generic_utils/loading_util.dart';
 import 'package:amigos_online/utils/generic_utils/social_network_image_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dart_notification_center/dart_notification_center.dart';
@@ -50,7 +50,8 @@ class UserSettingsController extends GetxController {
     if (response.data() != null) {
       socialNetworkModel = SocialNetworkModel.fromJson(response.data());
 
-      if (response.data()['whatsapp'] != null && response.data()['whatsapp'].toString() != "") {
+      if (response.data()['whatsapp'] != null &&
+          response.data()['whatsapp'].toString() != "") {
         int value =
             int.parse(socialNetworkModel.whatsapp.toString().replaceFirst(
                   new RegExp('55'),
@@ -355,5 +356,19 @@ class UserSettingsController extends GetxController {
 
     Get.snackbar('Parabéns', 'Sucesso ao trocar!!');
     return link;
+  }
+
+  void openProfileAlert() async {
+    Get.dialog(AlertDialog(
+      contentPadding: EdgeInsets.zero,
+      content: ColorGrid(onTap: (String value){
+
+
+      },),
+    ));
+  }
+
+  void changeProfileColor(String hex) {
+
   }
 }
