@@ -32,7 +32,7 @@ class UserProfileView extends StatelessWidget {
                       width: Get.width,
                       child: Column(
                         children: [
-                          Container(
+                          Obx(()=> Container(
                             decoration: BoxDecoration(
                                 color: userController.model.value
                                                 .customizedProfile !=
@@ -46,7 +46,7 @@ class UserProfileView extends StatelessWidget {
                                     bottomRight: Radius.circular(32),
                                     bottomLeft: Radius.circular(32))),
                             height: Get.height * 0.25,
-                          )
+                          ))
                         ],
                       ),
                     ),
@@ -74,7 +74,7 @@ class UserProfileView extends StatelessWidget {
                       width: Get.width,
                       child: Column(
                         children: [
-                          Container(
+                          Obx(()=>Container(
                             decoration: BoxDecoration(
                                 color: userController.model.value
                                                 .customizedProfile !=
@@ -88,7 +88,7 @@ class UserProfileView extends StatelessWidget {
                                     bottomRight: Radius.circular(32),
                                     bottomLeft: Radius.circular(32))),
                             height: Get.height * 0.25,
-                          )
+                          ))
                         ],
                       ),
                     ),

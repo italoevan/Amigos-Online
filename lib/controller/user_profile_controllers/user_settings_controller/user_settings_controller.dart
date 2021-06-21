@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:amigos_online/controller/user_profile_controllers/user_settings_controller/color_choose/color_grid.dart';
 import 'package:amigos_online/data/models/social_network_model.dart';
+import 'package:amigos_online/data/models/user_colors_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/ui/components/generic_components/generic_button.dart';
 import 'package:amigos_online/ui/components/profile_components/profile_settings_components/change_photo_component.dart';
@@ -358,17 +359,31 @@ class UserSettingsController extends GetxController {
     return link;
   }
 
+  Future<GridColorsModel> getColorsModel() async {
+    var response =
+        await firestore.collection('users_colors').doc('colors').get();
+    GridColorsModel model = GridColorsModel.fromJson(response.data());
+    print(model.colors.listColors.length);
+    return model;
+  }
+
   void openProfileAlert() async {
     Get.dialog(AlertDialog(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
       contentPadding: EdgeInsets.zero,
-      content: ColorGrid(onTap: (String value){
-
-
-      },),
+      content:
+          ColorGrid(onTap: changeProfileColor, model: await getColorsModel()),
     ));
   }
 
-  void changeProfileColor(String hex) {
+  void changeProfileColor(String hex) async {
+    await firestore
+        .collection('users')
+        .doc(GetAtualUserId().getUserId())
+        .update({'customizedProfile': true, 'hexColor': hex});
 
+    DartNotificationCenter.post(channel: 'profileBackgroundColor', options: hex);
+    Get.back();
   }
 }

@@ -36,9 +36,22 @@ class UserProfileController extends GetxController {
     DartNotificationCenter.subscribe(
         channel: 'profilePosts',
         observer: this,
-        onNotification: (v) async => onRefresh());
+        onNotification: (v) async {
+          onRefresh();
+        });
+    DartNotificationCenter.subscribe(
+        channel: 'profileBackgroundColor',
+        observer: this,
+        onNotification: (hex) {
+          model.value.hexColor = hex;
+          model.refresh();
+        });
     getUserName();
     super.onInit();
+  }
+
+  refreshColor(String hex) {
+    model.value.hexColor = hex;
   }
 
   onRefresh() async {

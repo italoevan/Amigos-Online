@@ -5,5 +5,6 @@ class RegisterChannel {
     DartNotificationCenter.registerChannel(channel: 'examples');
     DartNotificationCenter.registerChannel(channel: 'profileIMage');
     DartNotificationCenter.registerChannel(channel: 'profilePosts');
+    DartNotificationCenter.registerChannel(channel: 'profileBackgroundColor');
   }
 }
