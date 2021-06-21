@@ -15,11 +15,31 @@ class PostsItemController extends GetxController {
     super.onInit();
   }
 
+
+
   Future<String> getImageFromUser(PostsModel model) async {
     var response =
         await firebaseFirestore.collection('users').doc(model.user_id).get();
     var value = response.data()['user_image'];
+
     return value;
+  }
+
+  Future<Map<String, dynamic>> userIsVip(PostsModel model) async {
+    Map<String, dynamic> map = {'isVip ': false};
+
+    try {
+      var response =
+          await firebaseFirestore.collection('users').doc(model.user_id).get();
+      if (response.data()['customizedProfile'] != null &&
+          response.data()['customizedProfile'] == true) {
+        map = {'isVip': true, 'model': model};
+        return map;
+      }
+      return map;
+    } catch (e) {
+      return map;
+    }
   }
 
   report(PostsModel model) async {

@@ -1,4 +1,4 @@
-import 'package:amigos_online/data/models/user_model.dart';
+
 
 class PostsModel {
   String tag;

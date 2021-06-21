@@ -3,6 +3,7 @@ import 'package:amigos_online/providers/user_provider.dart';
 import 'package:amigos_online/routes/app_routes.dart';
 import 'package:amigos_online/ui/components/generic_components/user_avatar.dart';
 import 'package:amigos_online/ui/components/home_components/drawer/drawer_item.dart';
+import 'package:amigos_online/utils/generic_utils/hex_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,7 +33,7 @@ class HomeDrawer extends StatelessWidget {
                   });
                 },
                 child: Container(
-                  color: Colors.green,
+                  color: controller.userModel.hexColor != null ? HexConverter.toColor(controller.userModel.hexColor) : Colors.green,
                   child: Center(
                     child: UserAvatar(
                         isNetworkImage: true,
