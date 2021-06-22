@@ -1,5 +1,6 @@
-import 'package:amigos_online/controller/user_profile_controllers/user_settings_controller/color_choose/color_choose_item.dart';
+
 import 'package:amigos_online/data/models/user_colors_model.dart';
+import 'package:amigos_online/ui/pages/user_profile/user_settings/color_choose/color_choose_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

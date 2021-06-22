@@ -1,7 +1,7 @@
 import 'package:amigos_online/controller/home_controllers/sub_pages/following_controller.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/routes/app_routes.dart';
-import 'package:amigos_online/ui/components/generic_components/posts_item.dart';
+import 'package:amigos_online/ui/components/generic_components/posts_item/posts_item.dart';
 import 'package:amigos_online/ui/components/home_components/body/home_sub_pages/following_sub_page/empty_page.dart';
 import 'package:amigos_online/utils/generic_utils/loading_util.dart';
 import 'package:flutter/material.dart';

@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:amigos_online/controller/user_profile_controllers/user_settings_controller/color_choose/color_grid.dart';
 import 'package:amigos_online/data/models/social_network_model.dart';
 import 'package:amigos_online/data/models/user_colors_model.dart';
 import 'package:amigos_online/data/models/user_model.dart';
 import 'package:amigos_online/ui/components/generic_components/generic_button.dart';
 import 'package:amigos_online/ui/components/profile_components/profile_settings_components/change_photo_component.dart';
+import 'package:amigos_online/ui/pages/user_profile/user_settings/color_choose/color_grid.dart';
 import 'package:amigos_online/utils/firebase_utils/get_atual_user_id.dart';
 import 'package:amigos_online/utils/generic_utils/social_network_image_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -383,7 +383,8 @@ class UserSettingsController extends GetxController {
         .doc(GetAtualUserId().getUserId())
         .update({'customizedProfile': true, 'hexColor': hex});
 
-    DartNotificationCenter.post(channel: 'profileBackgroundColor', options: hex);
+    DartNotificationCenter.post(
+        channel: 'profileBackgroundColor', options: hex);
     Get.back();
   }
 }
