@@ -29,7 +29,7 @@ dependencies:
   regexpattern: ^1.0.0
   pull_to_refresh: ^1.6.5
   dart_notification_center: ^1.0.0+1
-  onesignal_flutter: ^2.0.0
+  onesignal_flutter: ^3.0.0
 
 
 

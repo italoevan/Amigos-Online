@@ -17,11 +17,9 @@ void main() async {
 
   //Remove this method to stop OneSignal Debugging
 
-  OneSignal.shared.init(
-    "01c28a89-7e60-43e2-9cbd-602ccc49f561",
-  );
-  OneSignal.shared
-      .setInFocusDisplayType(OSNotificationDisplayType.notification);
+  OneSignal.shared.setAppId("01c28a89-7e60-43e2-9cbd-602ccc49f561");
+  await OneSignal.shared
+        .promptUserForPushNotificationPermission(fallbackToSettings: true);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
